@@ -1,6 +1,7 @@
 ﻿namespace ImageProcessor.Plugins.Effects.Tests
 {
     using System;
+    using System.Drawing;
     using System.IO;
     using Xunit;
     using FluentAssertions;
@@ -10,10 +11,10 @@
         [Fact]
         public void ColorBalance_processes_image()
         {
-            foreach (var file in Directory.GetFiles(@".\img"))
+            foreach (string file in Directory.GetFiles(@".\img"))
             {
                 // arrange
-                using (var factory = new ImageFactory())
+                using (ImageFactory factory = new ImageFactory())
                 {
                     factory.Load(file);
 
