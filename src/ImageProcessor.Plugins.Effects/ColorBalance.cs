@@ -11,6 +11,9 @@
     /// <summary>
     /// Provides color balance modifications
     /// </summary>
+    /// <remarks>
+    /// Shameless copypasta from http://softwarebydefault.com/2013/04/11/bitmap-color-balance/
+    /// </remarks>
     public class ColorBalance : IGraphicsProcessor
     {
         public Image ProcessImage(ImageFactory factory)
@@ -102,8 +105,15 @@
             return bmp;
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="ColorBalanceParameters"/> for the effect
+        /// </summary>
         public dynamic DynamicParameter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the settings
+        /// </summary>
+        [Obsolete("This parameter is not used")]
         public Dictionary<string, string> Settings { get; set; }
     }
 }
