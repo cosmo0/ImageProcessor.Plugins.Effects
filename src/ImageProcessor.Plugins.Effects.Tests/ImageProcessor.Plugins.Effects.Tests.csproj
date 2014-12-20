@@ -52,4 +52,19 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageProcessor.Plugins.Effects\ImageProcessor.Plugins.Effects.csproj">
+      <Project>{B2540217-310E-461D-8E20-54A1B84387D7}</Project>
+      <Name>ImageProcessor.Plugins.Effects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\img\20130716_131842.jpg">
+      <Link>img\20130716_131842.jpg</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
