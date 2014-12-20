@@ -3,6 +3,7 @@
     using System;
     using System.Drawing;
     using System.IO;
+    using System.Reflection;
     using Xunit;
     using FluentAssertions;
 
@@ -11,7 +12,9 @@
         [Fact]
         public void ColorBalance_processes_image()
         {
-            foreach (string file in Directory.GetFiles(@".\img"))
+            string imgs = Path.Combine(Path.GetDirectoryName(typeof(ColorBalanceTests).Assembly.Location), "img");
+
+            foreach (string file in Directory.GetFiles(imgs))
             {
                 // arrange
                 using (ImageFactory factory = new ImageFactory())
@@ -25,7 +28,7 @@
                     Action act = () =>
                         {
                             Image img = processor.ProcessImage(factory);
-                            img.Save(string.Format(@".\img\{0}_result.jpg", Path.GetFileNameWithoutExtension(file)));
+                            img.Save(string.Format("{0}/{1}_result.jpg", imgs, Path.GetFileNameWithoutExtension(file)));
                         };
 
                     // assert
