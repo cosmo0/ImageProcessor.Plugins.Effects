@@ -33,6 +33,7 @@
       <HintPath>..\packages\ImageProcessor.2.1.0.0\lib\net40\ImageProcessor.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
