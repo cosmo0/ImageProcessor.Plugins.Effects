@@ -5,9 +5,9 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("ImageProcessor.Plugins.Effects")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Image Processor effects library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Thomas Broust")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("Thomas Broust")]
 [assembly: AssemblyTrademark("")]
