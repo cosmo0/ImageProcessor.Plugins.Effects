@@ -149,6 +149,16 @@
             return resultBitmap;
         }
 
+        /// <summary>
+        /// Checks the threshold of a pixel
+        /// </summary>
+        /// <param name="pixelBuffer">The pixel values</param>
+        /// <param name="offset1">The first offset</param>
+        /// <param name="offset2">The second offset</param>
+        /// <param name="gradientValue">The gradient value</param>
+        /// <param name="threshold">The threshold</param>
+        /// <param name="divideBy">The division value</param>
+        /// <returns>Whether the pixel matches the threshold</returns>
         private static bool CheckThreshold(byte[] pixelBuffer, int offset1, int offset2, ref int gradientValue, byte threshold, int divideBy = 1)
         {
             gradientValue += Math.Abs(pixelBuffer[offset1] - pixelBuffer[offset2]) / divideBy;

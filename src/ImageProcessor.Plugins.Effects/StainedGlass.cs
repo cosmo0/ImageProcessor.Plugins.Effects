@@ -15,6 +15,9 @@
     /// </summary>
     public class StainedGlass : IGraphicsProcessor
     {
+        /// <summary>
+        /// Defines a list of square roots (so as to not calculate them every time)
+        /// </summary>
         private static readonly Dictionary<int, int> squareRoots = new Dictionary<int, int>();
 
         /// <summary>
