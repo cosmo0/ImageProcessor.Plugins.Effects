@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsciiParameters.cs" />
-    <Compile Include="Imaging\EdgeDetection.cs" />
+    <Compile Include="Imaging\BitmapExtensions.cs" />
     <Compile Include="Imaging\Pixel.cs" />
     <Compile Include="Imaging\VoronoiPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +55,7 @@
     <Compile Include="OilPainting.cs" />
     <Compile Include="Ascii.cs" />
     <Compile Include="StainedGlassParameters.cs" />
+    <Compile Include="Text\StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

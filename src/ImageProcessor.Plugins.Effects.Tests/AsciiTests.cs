@@ -25,7 +25,7 @@
                     Action act = () =>
                     {
                         Image img = processor.ProcessImage(factory);
-                        img.Save(string.Format("{0}/{1}_stainedglass_default.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                        img.Save(string.Format("{0}/{1}_ascii_default.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
                     };
 
                     // assert

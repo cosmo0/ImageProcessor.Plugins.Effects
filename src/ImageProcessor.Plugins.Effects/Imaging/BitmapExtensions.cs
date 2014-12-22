@@ -2,13 +2,15 @@
 {
     using System;
     using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
+    using System.Drawing.Text;
     using System.Runtime.InteropServices;
 
     /// <summary>
-    /// Extension methods for edge detection
+    /// Extension methods for bitmaps
     /// </summary>
-    public static class EdgeDetection
+    public static class BitmapExtensions
     {
         /// <summary>
         /// Calculates gradient-based edge detection on an image
@@ -150,6 +152,35 @@
         }
 
         /// <summary>
+        /// Scales a bitmap
+        /// </summary>
+        /// <param name="sourceBitmap">The bitmap to scale</param>
+        /// <param name="factor">The scale factor (0-1)</param>
+        /// <returns>The scaled bitmap</returns>
+        public static Bitmap ScaleBitmap(this Bitmap sourceBitmap, float factor)
+        {
+            Bitmap resultBitmap = new Bitmap(
+                (int)(sourceBitmap.Width * factor),
+                (int)(sourceBitmap.Height * factor),
+                PixelFormat.Format32bppArgb);
+
+            Graphics graphics = Graphics.FromImage(resultBitmap);
+
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
+            graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            graphics.DrawImage(
+                sourceBitmap,
+                new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),
+                new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
+                GraphicsUnit.Pixel);
+
+            return resultBitmap;
+        }
+
+        /// <summary>
         /// Checks the threshold of a pixel
         /// </summary>
         /// <param name="pixelBuffer">The pixel values</param>
@@ -162,9 +193,7 @@
         private static bool CheckThreshold(byte[] pixelBuffer, int offset1, int offset2, ref int gradientValue, byte threshold, int divideBy = 1)
         {
             gradientValue += Math.Abs(pixelBuffer[offset1] - pixelBuffer[offset2]) / divideBy;
-
             gradientValue += Math.Abs(pixelBuffer[offset1 + 1] - pixelBuffer[offset2 + 1]) / divideBy;
-
             gradientValue += Math.Abs(pixelBuffer[offset1 + 2] - pixelBuffer[offset2 + 2]) / divideBy;
 
             return (gradientValue >= threshold);

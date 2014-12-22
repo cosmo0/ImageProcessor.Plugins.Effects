@@ -10,14 +10,14 @@
         /// </summary>
         public AsciiParameters()
         {
-            this.CharacterCount = 26;
-            this.FontSize = 10;
-            this.PixelPerCharacter = 5;
+            this.CharacterCount = 20;
+            this.FontSize = 3;
+            this.PixelPerCharacter = 2;
             this.Zoom = 100;
         }
 
         /// <summary>
-        /// Gets or sets the unique characters count
+        /// Gets or sets the unique characters count (which defines colors count)
         /// </summary>
         public int CharacterCount { get; set; }
 
@@ -27,7 +27,7 @@
         public int FontSize { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of pixels per character
+        /// Gets or sets the number of pixels a character spans
         /// </summary>
         public int PixelPerCharacter { get; set; }
 
