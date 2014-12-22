@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using ImageProcessor.Common.Exceptions;
     using ImageProcessor.Processors;
 
     /// <summary>
@@ -28,8 +29,26 @@
         /// <returns>The processed image</returns>
         public Image ProcessImage(ImageFactory factory)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            Bitmap sourceBitmap = new Bitmap(factory.Image);
+            AsciiParameters parameters = this.DynamicParameter;
+
+            try
+            {
+                throw new NotImplementedException();
+
+                //sourceBitmap = resultBitmap;
+            }
+            catch (Exception ex)
+            {
+                if (sourceBitmap != null)
+                {
+                    sourceBitmap.Dispose();
+                }
+
+                throw new ImageProcessingException("Error processing image with " + this.GetType().Name, ex);
+            }
+
+            return sourceBitmap;
         }
     }
 }
