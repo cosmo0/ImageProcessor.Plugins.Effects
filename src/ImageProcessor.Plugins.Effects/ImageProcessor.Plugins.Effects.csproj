@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsciiParameters.cs" />
+    <Compile Include="BiTonalParameters.cs" />
     <Compile Include="Imaging\BitmapExtensions.cs" />
     <Compile Include="Imaging\Pixel.cs" />
     <Compile Include="Imaging\VoronoiPoint.cs" />
