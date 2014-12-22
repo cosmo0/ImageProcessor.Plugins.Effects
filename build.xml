@@ -2,7 +2,9 @@
     <!-- Main projects -->
     <solution>
         <path>src\Effects.sln</path>
-        <nuspec>src\Effects.nuspec</nuspec>
+        <nuget>
+            <folder>src\ImageProcessor.Plugins.Effects</folder>
+        </nuget>
     </solution>
 
     <!-- Test projects informations -->

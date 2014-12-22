@@ -1,27 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-
-// Information about this assembly is defined by the following attributes.
-// Change them to the values specific to your project.
+using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("ImageProcessor.Plugins.Effects")]
 [assembly: AssemblyDescription("Image Processor effects library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Thomas Broust")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Thomas Broust")]
+[assembly: AssemblyCopyright("Thomas Broust, Dewald Esterhuizen")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// The form "{Major}.{Minor}.*" will automatically update the build and revision,
-// and "{Major}.{Minor}.{Build}.*" will update just the revision.
-
-[assembly: AssemblyVersion("1.0.*")]
-
-// The following attributes are used to specify the signing key for the assembly,
-// if desired. See the Mono documentation for more information about signing.
-
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
-
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: GuidAttribute("AD05B696-4B22-4D03-A45F-C1F02E60B5E3")]

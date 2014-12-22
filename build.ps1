@@ -62,16 +62,10 @@ task New-Nugets -depends Publish-Solution {
 	}
 
 	# Package the nuget
-	$PROJECTS.projects.solution | % {
-		if (-not $_.nuspec) { return }
-		$nuspec_local_path = (Join-Path $LOCAL_PATH $_.nuspec)
-		Write-Host "Building Nuget package from $nuspec_local_path"
-
-		if ((-not (Test-Path $nuspec_local_path)) -or (-not (Test-Path $NUGET_OUTPUT))) {
-			throw "The file $nuspec_local_path or $NUGET_OUTPUT could not be found"
-		}
+	$PROJECTS.projects.solution.nuget.folder | % {
+		Write-Host "Building Nuget package from $_"
 
 		# pack the nuget
-		& $NUGET Pack $nuspec_local_path -OutputDirectory $NUGET_OUTPUT
+		Start-Process -FilePath $NUGET -WorkingDirectory (Join-Path $LOCAL_PATH $_) -ArgumentList "Pack -OutputDirectory $NUGET_OUTPUT"
 	}
 }
