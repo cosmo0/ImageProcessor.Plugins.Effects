@@ -6,16 +6,8 @@
     using FluentAssertions;
     using Xunit;
 
-    public class ColorBalanceTests
+    public class ColorBalanceTests : BaseTest
     {
-        private readonly string[] images;
-
-        public ColorBalanceTests()
-        {
-            string path = Path.Combine(Path.GetDirectoryName(typeof(ColorBalanceTests).Assembly.Location), "img");
-            this.images = new string[] { Path.Combine(path, "1.jpg") };
-        }
-
         [Fact]
         public void ColorBalance_processes_image()
         {

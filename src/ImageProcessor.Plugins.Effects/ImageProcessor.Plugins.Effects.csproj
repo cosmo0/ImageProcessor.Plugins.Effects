@@ -50,6 +50,7 @@
     <Compile Include="RgbPivot.cs" />
     <Compile Include="OilPainting.cs" />
     <Compile Include="Ascii.cs" />
+    <Compile Include="StainedGlassParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
