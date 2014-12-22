@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Runtime.InteropServices;
     using ImageProcessor.Common.Exceptions;
     using ImageProcessor.Processors;
 
@@ -31,12 +33,48 @@
         public Image ProcessImage(ImageFactory factory)
         {
             Bitmap sourceBitmap = new Bitmap(factory.Image);
-            var parameters = this.DynamicParameter;
+            BiTonalParameters parameters = this.DynamicParameter;
+
+            Color darkColor = parameters.DarkColor;
+            Color lightColor = parameters.LightColor;
 
             try
             {
-                throw new NotImplementedException();
-                //sourceBitmap = resultBitmap;
+                BitmapData sourceData = sourceBitmap.LockBits(
+                    new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format32bppArgb);
+
+                byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
+                Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
+                sourceBitmap.UnlockBits(sourceData);
+
+                for (int k = 0; k + 4 < pixelBuffer.Length; k += 4)
+                {
+                    if (pixelBuffer[k] + pixelBuffer[k + 1] +
+                        pixelBuffer[k + 2] <= parameters.Threshold)
+                    {
+                        pixelBuffer[k] = darkColor.B;
+                        pixelBuffer[k + 1] = darkColor.G;
+                        pixelBuffer[k + 2] = darkColor.R;
+                    }
+                    else
+                    {
+                        pixelBuffer[k] = lightColor.B;
+                        pixelBuffer[k + 1] = lightColor.G;
+                        pixelBuffer[k + 2] = lightColor.R;
+                    }
+                }
+
+                Bitmap resultBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height);
+                BitmapData resultData = resultBitmap.LockBits(
+                    new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),
+                    ImageLockMode.WriteOnly,
+                    PixelFormat.Format32bppArgb);
+                Marshal.Copy(pixelBuffer, 0, resultData.Scan0, pixelBuffer.Length);
+                resultBitmap.UnlockBits(resultData); 
+
+                sourceBitmap = resultBitmap;
             }
             catch (Exception ex)
             {

@@ -14,6 +14,7 @@
         {
             this.DarkColor = Color.Black;
             this.LightColor = Color.White;
+            this.Threshold = 155;
         }
 
         /// <summary>
@@ -29,6 +30,6 @@
         /// <summary>
         /// Gets or sets the threshold
         /// </summary>
-        public byte Threshold { get; set; }
+        public int Threshold { get; set; }
     }
 }
