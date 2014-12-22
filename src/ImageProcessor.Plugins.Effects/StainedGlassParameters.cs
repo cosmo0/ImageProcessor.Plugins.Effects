@@ -4,6 +4,14 @@ namespace ImageProcessor.Plugins.Effects
 {
     public class StainedGlassParameters
     {
+        public StainedGlassParameters()
+        {
+            this.DistanceFormula = Formula.Euclidean;
+            this.Edges = false;
+            this.Factor = 1;
+            this.Size = 10;
+        }
+
         /// <summary>
         /// The distance formula type (the shapes)
         /// </summary>
@@ -22,7 +30,7 @@ namespace ImageProcessor.Plugins.Effects
 
         public Color EdgesColor { get; set; }
 
-        public int EdgesThreshold { get; set; }
+        public byte EdgesThreshold { get; set; }
 
         public float Factor { get; set; }
 

@@ -66,6 +66,6 @@ task New-Nugets -depends Publish-Solution {
 		Write-Host "Building Nuget package from $_"
 
 		# pack the nuget
-		Start-Process -FilePath $NUGET -WorkingDirectory (Join-Path $LOCAL_PATH $_) -ArgumentList "Pack -OutputDirectory $NUGET_OUTPUT"
+		Start-Process -FilePath $NUGET -WorkingDirectory (Join-Path $LOCAL_PATH $_) -ArgumentList "Pack -OutputDirectory $NUGET_OUTPUT" -Wait
 	}
 }

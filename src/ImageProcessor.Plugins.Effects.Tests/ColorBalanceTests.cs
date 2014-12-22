@@ -25,7 +25,7 @@
                     Action act = () =>
                     {
                         Image img = processor.ProcessImage(factory);
-                        img.Save(string.Format("{0}/{1}_result.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                        img.Save(string.Format("{0}/{1}_colorbalance.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
                     };
 
                     // assert
@@ -58,7 +58,7 @@
                     // act
                     Bitmap result = new Bitmap(processor.ProcessImage(factory));
                     Bitmap result2 = new Bitmap(processor2.ProcessImage(factory));
-                    result2.Save(string.Format("{0}/{1}_result2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                    result2.Save(string.Format("{0}/{1}_colorbalance2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
 
                     // assert
                     result.Equals(result2).Should().BeFalse("because different parameters should yield different images");
