@@ -25,13 +25,17 @@
             BitmapData bmpData1 = bmp1.LockBits(rect, ImageLockMode.ReadOnly, bmp1.PixelFormat);
             BitmapData bmpData2 = bmp2.LockBits(rect, ImageLockMode.ReadOnly, bmp2.PixelFormat);
 
-            unsafe {
+            unsafe
+            {
                 byte* ptr1 = (byte*)bmpData1.Scan0.ToPointer();
                 byte* ptr2 = (byte*)bmpData2.Scan0.ToPointer();
                 int width = rect.Width * 3; // for 24bpp pixel data
-                for (int y = 0; equals && y < rect.Height; y++) {
-                    for (int x = 0; x < width; x++) {
-                        if (*ptr1 != *ptr2) {
+                for (int y = 0; equals && y < rect.Height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        if (*ptr1 != *ptr2)
+                        {
                             equals = false;
                             break;
                         }

@@ -16,6 +16,22 @@
     /// </remarks>
     public class ColorBalance : IGraphicsProcessor
     {
+        /// <summary>
+        /// Gets or sets the <see cref="ColorBalanceParameters"/> for the effect
+        /// </summary>
+        public dynamic DynamicParameter { get; set; }
+
+        /// <summary>
+        /// Gets or sets the settings
+        /// </summary>
+        [Obsolete("This parameter is not used")]
+        public Dictionary<string, string> Settings { get; set; }
+
+        /// <summary>
+        /// Processes the image
+        /// </summary>
+        /// <param name="factory">The factory to use</param>
+        /// <returns>The processed image</returns>
         public Image ProcessImage(ImageFactory factory)
         {
             Bitmap bmp = new Bitmap(factory.Image);
@@ -24,19 +40,19 @@
             try
             {
                 BitmapData sourceData = bmp.LockBits(
-                                            new Rectangle(0, 0, bmp.Width, bmp.Height),  
-                                            ImageLockMode.ReadOnly, 
-                                            PixelFormat.Format32bppArgb); 
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format32bppArgb);
 
-                byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height]; 
+                byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
 
-                Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length); 
+                Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
 
-                bmp.UnlockBits(sourceData); 
+                bmp.UnlockBits(sourceData);
 
-                float blue = 0; 
-                float green = 0; 
-                float red = 0; 
+                float blue = 0;
+                float green = 0;
+                float red = 0;
 
                 float blueLevelFloat = parameters.Blue;
                 float greenLevelFloat = parameters.Green;
@@ -44,9 +60,9 @@
 
                 for (int k = 0; k + 4 < pixelBuffer.Length; k += 4)
                 {
-                    blue = 255.0f / blueLevelFloat * (float)pixelBuffer[k]; 
-                    green = 255.0f / greenLevelFloat * (float)pixelBuffer[k + 1]; 
-                    red = 255.0f / redLevelFloat * (float)pixelBuffer[k + 2]; 
+                    blue = 255.0f / blueLevelFloat * (float)pixelBuffer[k];
+                    green = 255.0f / greenLevelFloat * (float)pixelBuffer[k + 1];
+                    red = 255.0f / redLevelFloat * (float)pixelBuffer[k + 2];
 
                     if (blue > 255)
                     {
@@ -75,20 +91,20 @@
                         red = 0;
                     }
 
-                    pixelBuffer[k] = (byte)blue; 
-                    pixelBuffer[k + 1] = (byte)green; 
-                    pixelBuffer[k + 2] = (byte)red; 
+                    pixelBuffer[k] = (byte)blue;
+                    pixelBuffer[k + 1] = (byte)green;
+                    pixelBuffer[k + 2] = (byte)red;
                 }
 
-                Bitmap resultBitmap = new Bitmap(bmp.Width, bmp.Height); 
+                Bitmap resultBitmap = new Bitmap(bmp.Width, bmp.Height);
 
                 BitmapData resultData = resultBitmap.LockBits(
-                                            new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),  
-                                            ImageLockMode.WriteOnly, 
-                                            PixelFormat.Format32bppArgb); 
+                    new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),
+                    ImageLockMode.WriteOnly,
+                    PixelFormat.Format32bppArgb);
 
-                Marshal.Copy(pixelBuffer, 0, resultData.Scan0, pixelBuffer.Length); 
-                resultBitmap.UnlockBits(resultData); 
+                Marshal.Copy(pixelBuffer, 0, resultData.Scan0, pixelBuffer.Length);
+                resultBitmap.UnlockBits(resultData);
 
                 bmp = resultBitmap;
             }
@@ -104,16 +120,5 @@
 
             return bmp;
         }
-
-        /// <summary>
-        /// Gets or sets the <see cref="ColorBalanceParameters"/> for the effect
-        /// </summary>
-        public dynamic DynamicParameter { get; set; }
-
-        /// <summary>
-        /// Gets or sets the settings
-        /// </summary>
-        [Obsolete("This parameter is not used")]
-        public Dictionary<string, string> Settings { get; set; }
     }
 }

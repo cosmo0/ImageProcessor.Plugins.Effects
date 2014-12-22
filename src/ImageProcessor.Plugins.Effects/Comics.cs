@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ImageProcessor.Plugins.Effects
+﻿namespace ImageProcessor.Plugins.Effects
 {
     /// <summary>
     /// http://softwarebydefault.com/2013/06/02/cartoon-effect-image/
@@ -8,9 +6,5 @@ namespace ImageProcessor.Plugins.Effects
     /// </summary>
     public class Comics
     {
-        public Comics()
-        {
-        }
     }
 }
-

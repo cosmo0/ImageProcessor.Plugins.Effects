@@ -3,8 +3,8 @@
     using System;
     using System.Drawing;
     using System.IO;
-    using Xunit;
     using FluentAssertions;
+    using Xunit;
 
     public class ColorBalanceTests
     {
@@ -13,13 +13,13 @@
         public ColorBalanceTests()
         {
             string path = Path.Combine(Path.GetDirectoryName(typeof(ColorBalanceTests).Assembly.Location), "img");
-            images = new string[] { Path.Combine(path, "1.jpg") };
+            this.images = new string[] { Path.Combine(path, "1.jpg") };
         }
 
         [Fact]
         public void ColorBalance_processes_image()
         {
-            foreach (string file in images)
+            foreach (string file in this.images)
             {
                 // arrange
                 using (ImageFactory factory = new ImageFactory())
@@ -45,7 +45,7 @@
         [Fact]
         public void Different_values_yield_different_images()
         {
-            foreach (string file in images)
+            foreach (string file in this.images)
             {
                 // arrange
                 using (ImageFactory factory = new ImageFactory())
@@ -56,7 +56,12 @@
                     processor.DynamicParameter = new ColorBalanceParameters();
 
                     ColorBalance processor2 = new ColorBalance();
-                    processor2.DynamicParameter = new ColorBalanceParameters() { Blue = 155, Green = 155, Red = 155 };
+                    processor2.DynamicParameter = new ColorBalanceParameters()
+                    {
+                        Blue = 155,
+                        Green = 155,
+                        Red = 155
+                    };
 
                     // act
                     Bitmap result = new Bitmap(processor.ProcessImage(factory));
