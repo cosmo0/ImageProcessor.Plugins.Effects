@@ -1,0 +1,13 @@
+<projects>
+    <!-- Main projects -->
+    <solution>
+        <path>.\src\Effects.sln</path>
+    </solution>
+
+    <!-- Test projects informations -->
+    <test>
+        <path>ImageProcessor.Plugins.Effects.Tests.dll</path>
+        <runner>xunit.console.clr4.exe</runner>
+        <results>Effects_tests.html</results>
+    </test>
+</projects>

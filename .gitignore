@@ -184,3 +184,4 @@ FakesAssemblies/
 
 .DS_Store
 *.userprefs
+tests/
