@@ -1,7 +1,8 @@
 <projects>
     <!-- Main projects -->
     <solution>
-        <path>.\src\Effects.sln</path>
+        <path>src\Effects.sln</path>
+        <nuspec>src\Effects.nuspec</nuspec>
     </solution>
 
     <!-- Test projects informations -->
