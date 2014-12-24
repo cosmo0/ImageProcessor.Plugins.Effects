@@ -13,6 +13,32 @@
     public static class BitmapExtensions
     {
         /// <summary>
+        /// Converts a bitmap to a 32-bit ARGB bitmap
+        /// </summary>
+        /// <param name="sourceBitmap">The bitmap to convert</param>
+        /// <returns>The converted bitmap</returns>
+        public static Bitmap Format32bppArgbCopy(this Bitmap sourceBitmap)
+        {
+            Bitmap copyBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height, PixelFormat.Format32bppArgb);
+
+            using (Graphics graphicsObject = Graphics.FromImage(copyBitmap))
+            {
+                graphicsObject.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                graphicsObject.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphicsObject.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                graphicsObject.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                graphicsObject.DrawImage(
+                    sourceBitmap,
+                    new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
+                    new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
+                    GraphicsUnit.Pixel);
+            }
+
+            return copyBitmap;
+        }
+
+        /// <summary>
         /// Calculates gradient-based edge detection on an image
         /// </summary>
         /// <param name="sourceBitmap">The source bitmap</param>
