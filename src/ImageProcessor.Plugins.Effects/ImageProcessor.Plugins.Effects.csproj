@@ -42,6 +42,7 @@
     <Compile Include="BiTonalParameters.cs" />
     <Compile Include="ColorSubstitutionParameters.cs" />
     <Compile Include="ComicsParameters.cs" />
+    <Compile Include="DrawingParameters.cs" />
     <Compile Include="Imaging\BitmapExtensions.cs" />
     <Compile Include="Imaging\Matrix.cs" />
     <Compile Include="Imaging\Pixel.cs" />
