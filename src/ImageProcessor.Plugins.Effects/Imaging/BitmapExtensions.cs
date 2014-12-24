@@ -11,6 +11,9 @@
     /// <summary>
     /// Extension methods for bitmaps
     /// </summary>
+    /// <remarks>
+    /// Copied from samples on http://softwarebydefault.com/
+    /// </remarks>
     public static class BitmapExtensions
     {
         /// <summary>
