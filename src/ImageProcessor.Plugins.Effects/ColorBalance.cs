@@ -26,36 +26,9 @@
 
             for (int k = 0; k + 4 < pixelBuffer.Length; k += 4)
             {
-                float blue = 255.0f / blueLevelFloat * (float)pixelBuffer[k];
-                float green = 255.0f / greenLevelFloat * (float)pixelBuffer[k + 1];
-                float red = 255.0f / redLevelFloat * (float)pixelBuffer[k + 2];
-
-                if (blue > 255)
-                {
-                    blue = 255;
-                }
-                else if (blue < 0)
-                {
-                    blue = 0;
-                }
-
-                if (green > 255)
-                {
-                    green = 255;
-                }
-                else if (green < 0)
-                {
-                    green = 0;
-                }
-
-                if (red > 255)
-                {
-                    red = 255;
-                }
-                else if (red < 0)
-                {
-                    red = 0;
-                }
+                float blue = Guard(255.0f / blueLevelFloat * (float)pixelBuffer[k]);
+                float green = Guard(255.0f / greenLevelFloat * (float)pixelBuffer[k + 1]);
+                float red = Guard(255.0f / redLevelFloat * (float)pixelBuffer[k + 2]);
 
                 pixelBuffer[k] = (byte)blue;
                 pixelBuffer[k + 1] = (byte)green;

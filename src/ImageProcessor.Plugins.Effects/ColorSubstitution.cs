@@ -29,9 +29,6 @@
             byte greenFilter = parameters.ToReplace.G;
             byte blueFilter = parameters.ToReplace.B;
 
-            byte minValue = 0;
-            byte maxValue = 255;
-
             for (int k = 0; k < pixelBuffer.Length; k += 4)
             {
                 sourceAlpha = pixelBuffer[k + 3];
@@ -50,37 +47,13 @@
                             sourceRed > redFilter - parameters.Threshold))
                     {
                         resultBlue = blueFilter - sourceBlue + newBlueValue;
-
-                        if (resultBlue > maxValue)
-                        {
-                            resultBlue = maxValue;
-                        }
-                        else if (resultBlue < minValue)
-                        {
-                            resultBlue = minValue;
-                        }
+                        resultBlue = Guard(resultBlue);
 
                         resultGreen = greenFilter - sourceGreen + newGreenValue;
-
-                        if (resultGreen > maxValue)
-                        {
-                            resultGreen = maxValue;
-                        }
-                        else if (resultGreen < minValue)
-                        {
-                            resultGreen = minValue;
-                        }
+                        resultGreen = Guard(resultGreen);
 
                         resultRed = redFilter - sourceRed + newRedValue;
-
-                        if (resultRed > maxValue)
-                        {
-                            resultRed = maxValue;
-                        }
-                        else if (resultRed < minValue)
-                        {
-                            resultRed = minValue;
-                        }
+                        resultRed = Guard(resultRed);
 
                         pixelBuffer[k] = (byte)resultBlue;
                         pixelBuffer[k + 1] = (byte)resultGreen;

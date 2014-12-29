@@ -107,5 +107,38 @@
         {
             return sourceBitmap;
         }
+            
+        /// <summary>
+        /// Guards a color minimum (0) and maximum (255) values
+        /// </summary>
+        /// <param name="color">The color value</param>
+        protected static float Guard(float color)
+        {
+            if (color > 255)
+            {
+                return 255;
+            }
+
+            return color < 0 ? 0 : color;
+        }
+
+        /// <summary>
+        /// Guards a color minimum (0) and maximum (255) values
+        /// </summary>
+        /// <param name="color">The color value</param>
+        protected static int Guard(int color)
+        {
+            if (color > 255)
+            {
+                return 255;
+            }
+
+            if (color < 0)
+            {
+                return 0;
+            }
+
+            return color;
+        }
     }
 }
