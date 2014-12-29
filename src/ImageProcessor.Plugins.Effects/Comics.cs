@@ -11,6 +11,14 @@
     /// </summary>
     public class Comics : ProcessorBase
     {
+        /// <summary>
+        /// Processes the image using a pixel buffer
+        /// </summary>
+        /// <param name="pixelBuffer">The pixel buffer to use</param>
+        /// <param name="sourceWidth">The source image width</param>
+        /// <param name="sourceHeight">The source image height</param>
+        /// <param name="sourceStride">The source data stride</param>
+        /// <returns>The processed pixel buffer</returns>
         protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             ComicsParameters parameters = this.DynamicParameter;
@@ -27,7 +35,7 @@
             {
                 for (int offsetX = 1; offsetX < sourceWidth - 1; offsetX++)
                 {
-                    byteOffset = offsetY * sourceStride + offsetX * 4;
+                    byteOffset = (offsetY * sourceStride) + (offsetX * 4);
                     blueGradient = Math.Abs(pixelBuffer[byteOffset - 4] - pixelBuffer[byteOffset + 4]);
                     blueGradient += Math.Abs(pixelBuffer[byteOffset - sourceStride] - pixelBuffer[byteOffset + sourceStride]);
                     byteOffset++;
@@ -79,14 +87,7 @@
                                 redGradient = Math.Abs(pixelBuffer[byteOffset - 4 - sourceStride] - pixelBuffer[byteOffset + 4 + sourceStride]);
                                 redGradient += Math.Abs(pixelBuffer[byteOffset - sourceStride + 4] - pixelBuffer[byteOffset + sourceStride - 4]);
 
-                                if (blueGradient + greenGradient + redGradient > parameters.Threshold)
-                                {
-                                    exceedsThreshold = true;
-                                }
-                                else
-                                {
-                                    exceedsThreshold = false;
-                                }
+                                exceedsThreshold = blueGradient + greenGradient + redGradient > parameters.Threshold;
                             }
                         }
                     }
@@ -106,9 +107,9 @@
                         red = pixelBuffer[byteOffset + 2];
                     }
 
-                    blue = (blue > 255 ? 255 : (blue < 0 ? 0 : blue));
-                    green = (green > 255 ? 255 : (green < 0 ? 0 : green));
-                    red = (red > 255 ? 255 : (red < 0 ? 0 : red));
+                    blue = blue > 255 ? 255 : (blue < 0 ? 0 : blue);
+                    green = green > 255 ? 255 : (green < 0 ? 0 : green);
+                    red = red > 255 ? 255 : (red < 0 ? 0 : red);
 
                     resultBuffer[byteOffset] = (byte)blue;
                     resultBuffer[byteOffset + 1] = (byte)green;

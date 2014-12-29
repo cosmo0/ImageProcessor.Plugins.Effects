@@ -1,20 +1,19 @@
 ﻿namespace ImageProcessor.Plugins.Effects
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Drawing.Imaging;
-    using System.Runtime.InteropServices;
-    using ImageProcessor.Common.Exceptions;
-    using ImageProcessor.Plugins.Effects.Imaging;
-    using ImageProcessor.Processors;
-
     /// <summary>
     /// Substitutes a color for another
     /// http://softwarebydefault.com/2013/03/16/bitmap-color-substitution/
     /// </summary>
     public class ColorSubstitution : ProcessorBase
     {
+        /// <summary>
+        /// Processes the image using a pixel buffer
+        /// </summary>
+        /// <param name="pixelBuffer">The pixel buffer to use</param>
+        /// <param name="sourceWidth">The source image width</param>
+        /// <param name="sourceHeight">The source image height</param>
+        /// <param name="sourceStride">The source data stride</param>
+        /// <returns>The processed pixel buffer</returns>
         protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             ColorSubstitutionParameters parameters = this.DynamicParameter;

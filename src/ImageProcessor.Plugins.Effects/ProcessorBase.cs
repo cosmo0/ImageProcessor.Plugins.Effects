@@ -82,6 +82,7 @@
         /// <param name="sourceWidth">The source image width</param>
         /// <param name="sourceHeight">The source image height</param>
         /// <param name="sourceStride">The source data stride</param>
+        /// <returns>The processed pixel buffer</returns>
         protected virtual byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             throw new NotImplementedException();
@@ -90,8 +91,8 @@
         /// <summary>
         /// Post-processes the result bitmap
         /// </summary>
-        /// <param name="resultBitmap">The bitmap to post-process</param>
-        /// <returns>The processes bitmap</returns>
+        /// <param name="resultBitmap">The result bitmap to post-process</param>
+        /// <returns>The processed bitmap</returns>
         protected virtual Bitmap PostProcess(Bitmap resultBitmap)
         {
             return resultBitmap; 
@@ -101,7 +102,7 @@
         /// Pre-processes the source bitmap
         /// </summary>
         /// <returns>The processed bitmap</returns>
-        /// <param name="sourceBitmap">The source bitmap.</param>
+        /// <param name="sourceBitmap">The source bitmap to pre-process</param>
         protected virtual Bitmap PreProcess(Bitmap sourceBitmap)
         {
             return sourceBitmap;

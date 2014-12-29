@@ -12,6 +12,10 @@
         /// Processes the image using a pixel buffer
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer to use</param>
+        /// <param name="sourceWidth">The source image width</param>
+        /// <param name="sourceHeight">The source image height</param>
+        /// <param name="sourceStride">The source data stride</param>
+        /// <returns>The processed pixel buffer</returns>
         protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             ColorBalanceParameters parameters = this.DynamicParameter;

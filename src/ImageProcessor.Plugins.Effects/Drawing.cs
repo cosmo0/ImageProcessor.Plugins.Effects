@@ -1,12 +1,6 @@
 ﻿namespace ImageProcessor.Plugins.Effects
 {
     using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Drawing.Imaging;
-    using System.Runtime.InteropServices;
-    using ImageProcessor.Common.Exceptions;
-    using ImageProcessor.Processors;
 
     /// <summary>
     /// Applies a hand-drawing filter to an image
@@ -22,6 +16,7 @@
         /// <param name="sourceWidth">The source image width</param>
         /// <param name="sourceHeight">The source image height</param>
         /// <param name="sourceStride">The source data stride</param>
+        /// <returns>The processed pixel buffer</returns>
         protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             DrawingParameters parameters = this.DynamicParameter;
@@ -39,7 +34,7 @@
             {
                 for (int offsetX = 1; offsetX < sourceWidth - 1; offsetX++)
                 {
-                    byteOffset = offsetY * sourceStride + offsetX * 4;
+                    byteOffset = (offsetY * sourceStride) + (offsetX * 4);
                     blueGradient = Math.Abs(pixelBuffer[byteOffset - 4] - pixelBuffer[byteOffset + 4]) / derivative;
                     blueGradient += Math.Abs(pixelBuffer[byteOffset - sourceStride] - pixelBuffer[byteOffset + sourceStride]) / derivative;
                     byteOffset++;
@@ -107,27 +102,26 @@
 
                     if (exceedsThreshold)
                     {
-                        if (parameters.FilterType == DrawingParameters.EdgeFilterType.EdgeDetectMono)
+                        switch (parameters.FilterType)
                         {
-                            blue = green = red = 255;
-                        }
-                        else if (parameters.FilterType == DrawingParameters.EdgeFilterType.EdgeDetectGradient)
-                        {
-                            blue = blueGradient * parameters.BlueFactor;
-                            green = greenGradient * parameters.GreenFactor;
-                            red = redGradient * parameters.RedFactor;
-                        }
-                        else if (parameters.FilterType == DrawingParameters.EdgeFilterType.Sharpen)
-                        {
-                            blue = pixelBuffer[byteOffset] * parameters.BlueFactor;
-                            green = pixelBuffer[byteOffset + 1] * parameters.GreenFactor;
-                            red = pixelBuffer[byteOffset + 2] * parameters.RedFactor;
-                        }
-                        else if (parameters.FilterType == DrawingParameters.EdgeFilterType.SharpenGradient)
-                        {
-                            blue = pixelBuffer[byteOffset] + blueGradient * parameters.BlueFactor;
-                            green = pixelBuffer[byteOffset + 1] + greenGradient * parameters.GreenFactor;
-                            red = pixelBuffer[byteOffset + 2] + redGradient * parameters.RedFactor;
+                            case DrawingParameters.EdgeFilterType.EdgeDetectMono:
+                                blue = green = red = 255;
+                                break;
+                            case DrawingParameters.EdgeFilterType.EdgeDetectGradient:
+                                blue = blueGradient * parameters.BlueFactor;
+                                green = greenGradient * parameters.GreenFactor;
+                                red = redGradient * parameters.RedFactor;
+                                break;
+                            case DrawingParameters.EdgeFilterType.Sharpen:
+                                blue = pixelBuffer[byteOffset] * parameters.BlueFactor;
+                                green = pixelBuffer[byteOffset + 1] * parameters.GreenFactor;
+                                red = pixelBuffer[byteOffset + 2] * parameters.RedFactor;
+                                break;
+                            case DrawingParameters.EdgeFilterType.SharpenGradient:
+                                blue = pixelBuffer[byteOffset] + (blueGradient * parameters.BlueFactor);
+                                green = pixelBuffer[byteOffset + 1] + (greenGradient * parameters.GreenFactor);
+                                red = pixelBuffer[byteOffset + 2] + (redGradient * parameters.RedFactor);
+                                break;
                         }
                     }
                     else
@@ -146,9 +140,10 @@
                         }
                     }
 
-                    blue = (blue > 255 ? 255 : (blue < 0 ? 0 : blue));
-                    green = (green > 255 ? 255 : (green < 0 ? 0 : green));
-                    red = (red > 255 ? 255 : (red < 0 ? 0 : red));
+                    // thresholds checks and guards
+                    blue = blue > 255 ? 255 : (blue < 0 ? 0 : blue);
+                    green = green > 255 ? 255 : (green < 0 ? 0 : green);
+                    red = red > 255 ? 255 : (red < 0 ? 0 : red);
 
                     resultBuffer[byteOffset] = (byte)blue;
                     resultBuffer[byteOffset + 1] = (byte)green;

@@ -15,12 +15,16 @@
         /// <summary>
         /// Defines a list of square roots (so as to not calculate them every time)
         /// </summary>
-        private static readonly Dictionary<int, int> squareRoots = new Dictionary<int, int>();
+        private static readonly Dictionary<int, int> SquareRoots = new Dictionary<int, int>();
 
         /// <summary>
         /// Processes the image using a pixel buffer
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer to use</param>
+        /// <param name="sourceWidth">The source image width</param>
+        /// <param name="sourceHeight">The source image height</param>
+        /// <param name="sourceStride">The source data stride</param>
+        /// <returns>The processed pixel buffer</returns>
         protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             StainedGlassParameters parameters = this.DynamicParameter;
@@ -42,14 +46,14 @@
             {
                 for (int col = 0; col < sourceWidth - blockSize; col += blockSize)
                 {
-                    sourceOffset = row * sourceStride + col * 4;
+                    sourceOffset = (row * sourceStride) + (col * 4);
                     neighbourHoodTotal = 0;
 
                     for (int y = 0; y < blockSize; y++)
                     {
                         for (int x = 0; x < blockSize; x++)
                         {
-                            resultOffset = sourceOffset + y * sourceStride + x * 4;
+                            resultOffset = sourceOffset + (y * sourceStride) + (x * 4);
                             neighbourHoodTotal += pixelBuffer[resultOffset];
                             neighbourHoodTotal += pixelBuffer[resultOffset + 1];
                             neighbourHoodTotal += pixelBuffer[resultOffset + 2];
@@ -78,8 +82,8 @@
 
                 pointSubset.AddRange(from t in randomPointList
                     where
-                    rowOffset >= t.YOffset - blockSize * 2 &&
-                    rowOffset <= t.YOffset + blockSize * 2
+                    rowOffset >= t.YOffset - (blockSize * 2) &&
+                    rowOffset <= t.YOffset + (blockSize * 2)
                     select t);
 
                 for (int k = 0; k < pointSubset.Count; k++)
@@ -124,7 +128,7 @@
 
                 for (int i = 0; i < randomPointList[k].PixelCollection.Count; i++)
                 {
-                    resultOffset = randomPointList[k].PixelCollection[i].YOffset * sourceStride + randomPointList[k].PixelCollection[i].XOffset * 4;
+                    resultOffset = (randomPointList[k].PixelCollection[i].YOffset * sourceStride) + (randomPointList[k].PixelCollection[i].XOffset * 4);
                     resultBuffer[resultOffset] = (byte)randomPointList[k].BlueAverage;
                     resultBuffer[resultOffset + 1] = (byte)randomPointList[k].GreenAverage;
                     resultBuffer[resultOffset + 2] = (byte)randomPointList[k].RedAverage;
@@ -138,7 +142,8 @@
         /// <summary>
         /// Post-processes the result bitmap
         /// </summary>
-        /// <param name="resultBitmap">The result bitmap.</param>
+        /// <param name="resultBitmap">The result bitmap to post-process</param>
+        /// <returns>The processed bitmap</returns>
         protected override Bitmap PostProcess(Bitmap resultBitmap)
         {
             StainedGlassParameters parameters = this.DynamicParameter;
@@ -174,14 +179,14 @@
         /// <returns>The calculated distance</returns>
         private static int CalculateDistanceEuclidean(int x1, int x2, int y1, int y2)
         {
-            int square = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+            int square = ((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2));
 
-            if (!squareRoots.ContainsKey(square))
+            if (!SquareRoots.ContainsKey(square))
             {
-                squareRoots.Add(square, (int)Math.Sqrt(square));
+                SquareRoots.Add(square, (int)Math.Sqrt(square));
             }
 
-            return squareRoots[square];
+            return SquareRoots[square];
         }
 
         /// <summary>
