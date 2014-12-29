@@ -44,7 +44,7 @@
                 Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
                 sourceBitmap.UnlockBits(sourceData);
 
-                this.Process(pixelBuffer);
+                this.Process(pixelBuffer, sourceBitmap.Width, sourceBitmap.Height, sourceData.Stride);
 
                 Bitmap resultBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height);
                 BitmapData resultData = resultBitmap.LockBits(
@@ -53,6 +53,8 @@
                     PixelFormat.Format32bppArgb);
                 Marshal.Copy(pixelBuffer, 0, resultData.Scan0, pixelBuffer.Length);
                 resultBitmap.UnlockBits(resultData); 
+
+                this.PostProcess(resultBitmap);
 
                 sourceBitmap = resultBitmap;
             }
@@ -73,6 +75,18 @@
         /// Processes the image using a pixel buffer
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer to use</param>
-        protected abstract void Process(byte[] pixelBuffer);
+        /// <param name="sourceWidth">The source image width</param>
+        /// <param name="sourceHeight">The source image height</param>
+        /// <param name="sourceStride">The source data stride</param>
+        protected virtual void Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Post-processes the result bitmap
+        /// </summary>
+        /// <param name="resultBitmap">The bitmap to post-process</param>
+        protected virtual void PostProcess(Bitmap resultBitmap) { }
     }
 }

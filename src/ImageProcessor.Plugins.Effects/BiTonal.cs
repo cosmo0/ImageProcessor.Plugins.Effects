@@ -12,7 +12,7 @@
         /// Process the specified image using a pixel buffer.
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer.</param>
-        protected void Process(byte[] pixelBuffer)
+        protected override void Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             BiTonalParameters parameters = this.DynamicParameter;
 

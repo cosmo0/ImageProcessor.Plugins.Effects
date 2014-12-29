@@ -42,7 +42,6 @@
             double red = 0.0;
 
             int filterWidth = filterMatrix.GetLength(1);
-            int filterHeight = filterMatrix.GetLength(0);
             int filterOffset = (filterWidth - 1) / 2;
             int calcOffset = 0;
             int byteOffset = 0;
