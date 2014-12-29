@@ -62,6 +62,7 @@
     <Compile Include="Ascii.cs" />
     <Compile Include="StainedGlassParameters.cs" />
     <Compile Include="Text\StringExtensions.cs" />
+    <Compile Include="ProcessorBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

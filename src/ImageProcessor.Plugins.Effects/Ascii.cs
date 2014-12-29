@@ -54,9 +54,6 @@
 
                 StringBuilder asciiArt = new StringBuilder();
 
-                int avgBlue = 0;
-                int avgGreen = 0;
-                int avgRed = 0;
                 int offset = 0;
 
                 int rows = sourceBitmap.Height / pixelBlockSize;
@@ -71,16 +68,15 @@
                 {
                     for (int x = 0; x < columns; x++)
                     {
-                        avgBlue = 0;
-                        avgGreen = 0;
-                        avgRed = 0;
+                        int avgBlue = 0;
+                        int avgGreen = 0;
+                        int avgRed = 0;
 
                         for (int pY = 0; pY < pixelBlockSize; pY++)
                         {
                             for (int pX = 0; pX < pixelBlockSize; pX++)
                             {
-                                offset = y * pixelBlockSize * sourceData.Stride +
-                                         x * pixelBlockSize * 4;
+                                offset = y * pixelBlockSize * sourceData.Stride + x * pixelBlockSize * 4;
 
                                 offset += pY * sourceData.Stride;
                                 offset += pX * 4;
@@ -127,11 +123,9 @@
             StringBuilder stringBuilder = new StringBuilder(maxSize);
             Random randomChar = new Random();
 
-            char charValue;
-
             for (int k = 0; k < maxSize; k++)
             {
-                charValue = (char)(Math.Floor(255 * randomChar.NextDouble() * 4));
+                char charValue = (char)(Math.Floor(255 * randomChar.NextDouble() * 4));
 
                 if (stringBuilder.ToString().IndexOf(charValue) != -1)
                 {
@@ -165,10 +159,9 @@
         /// <returns>The character</returns>
         private static string GetColorCharacter(int blue, int green, int red)
         {
-            string colorChar = String.Empty;
             int intensity = (blue + green + red) / 3 * (colorCharacters.Length - 1) / 255;
 
-            colorChar = colorCharacters.Substring(intensity, 1).ToUpper();
+            string colorChar = colorCharacters.Substring(intensity, 1).ToUpper();
             colorChar += colorChar.ToLower();
 
             return colorChar;
