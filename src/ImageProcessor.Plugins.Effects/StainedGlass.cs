@@ -21,9 +21,11 @@
         /// Processes the image using a pixel buffer
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer to use</param>
-        protected override void Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
+        protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             StainedGlassParameters parameters = this.DynamicParameter;
+
+            byte[] resultBuffer = new byte[sourceStride * sourceHeight];
 
             int neighbourHoodTotal = 0;
             int sourceOffset = 0;
@@ -123,26 +125,30 @@
                 for (int i = 0; i < randomPointList[k].PixelCollection.Count; i++)
                 {
                     resultOffset = randomPointList[k].PixelCollection[i].YOffset * sourceStride + randomPointList[k].PixelCollection[i].XOffset * 4;
-                    pixelBuffer[resultOffset] = (byte)randomPointList[k].BlueAverage;
-                    pixelBuffer[resultOffset + 1] = (byte)randomPointList[k].GreenAverage;
-                    pixelBuffer[resultOffset + 2] = (byte)randomPointList[k].RedAverage;
-                    pixelBuffer[resultOffset + 3] = 255;
+                    resultBuffer[resultOffset] = (byte)randomPointList[k].BlueAverage;
+                    resultBuffer[resultOffset + 1] = (byte)randomPointList[k].GreenAverage;
+                    resultBuffer[resultOffset + 2] = (byte)randomPointList[k].RedAverage;
+                    resultBuffer[resultOffset + 3] = 255;
                 }
             }
+
+            return resultBuffer;
         }
 
         /// <summary>
         /// Post-processes the result bitmap
         /// </summary>
-        /// <param name="resultBitmap">Result bitmap.</param>
-        protected override void PostProcess(Bitmap resultBitmap)
+        /// <param name="resultBitmap">The result bitmap.</param>
+        protected override Bitmap PostProcess(Bitmap resultBitmap)
         {
             StainedGlassParameters parameters = this.DynamicParameter;
 
             if (parameters.Edges)
             {
-                resultBitmap = resultBitmap.GradientBasedEdgeDetectionFilter(parameters.EdgesColor, parameters.EdgesThreshold);
+                return resultBitmap.GradientBasedEdgeDetectionFilter(parameters.EdgesColor, parameters.EdgesThreshold);
             }
+
+            return resultBitmap;
         }
 
         /// <summary>
@@ -170,7 +176,7 @@
         {
             int square = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
 
-            if (squareRoots.ContainsKey(square) == false)
+            if (!squareRoots.ContainsKey(square))
             {
                 squareRoots.Add(square, (int)Math.Sqrt(square));
             }

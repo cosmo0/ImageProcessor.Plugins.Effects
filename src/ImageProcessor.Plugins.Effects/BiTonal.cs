@@ -12,7 +12,7 @@
         /// Process the specified image using a pixel buffer.
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer.</param>
-        protected override void Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
+        protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             BiTonalParameters parameters = this.DynamicParameter;
 
@@ -35,6 +35,8 @@
                     pixelBuffer[k + 2] = lightColor.R;
                 }
             }
+
+            return pixelBuffer;
         }
     }
 }

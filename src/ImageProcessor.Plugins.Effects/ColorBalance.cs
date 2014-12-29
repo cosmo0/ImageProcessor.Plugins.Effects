@@ -12,7 +12,7 @@
         /// Processes the image using a pixel buffer
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer to use</param>
-        protected override void Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
+        protected override byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             ColorBalanceParameters parameters = this.DynamicParameter;
 
@@ -57,6 +57,8 @@
                 pixelBuffer[k + 1] = (byte)green;
                 pixelBuffer[k + 2] = (byte)red;
             }
+
+            return pixelBuffer;
         }
     }
 }

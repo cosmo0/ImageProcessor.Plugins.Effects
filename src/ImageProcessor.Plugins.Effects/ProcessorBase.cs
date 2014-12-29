@@ -44,7 +44,8 @@
                 Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
                 sourceBitmap.UnlockBits(sourceData);
 
-                this.Process(pixelBuffer, sourceBitmap.Width, sourceBitmap.Height, sourceData.Stride);
+                // process the pixels buffer
+                pixelBuffer = this.Process(pixelBuffer, sourceBitmap.Width, sourceBitmap.Height, sourceData.Stride);
 
                 Bitmap resultBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height);
                 BitmapData resultData = resultBitmap.LockBits(
@@ -54,7 +55,8 @@
                 Marshal.Copy(pixelBuffer, 0, resultData.Scan0, pixelBuffer.Length);
                 resultBitmap.UnlockBits(resultData); 
 
-                this.PostProcess(resultBitmap);
+                // possible image post-process
+                resultBitmap = this.PostProcess(resultBitmap);
 
                 sourceBitmap = resultBitmap;
             }
@@ -78,7 +80,7 @@
         /// <param name="sourceWidth">The source image width</param>
         /// <param name="sourceHeight">The source image height</param>
         /// <param name="sourceStride">The source data stride</param>
-        protected virtual void Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
+        protected virtual byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
         {
             throw new NotImplementedException();
         }
@@ -87,6 +89,6 @@
         /// Post-processes the result bitmap
         /// </summary>
         /// <param name="resultBitmap">The bitmap to post-process</param>
-        protected virtual void PostProcess(Bitmap resultBitmap) { }
+        protected virtual Bitmap PostProcess(Bitmap resultBitmap) { return resultBitmap; }
     }
 }
