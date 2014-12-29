@@ -35,6 +35,8 @@
 
             try
             {
+                sourceBitmap = this.PreProcess(sourceBitmap);
+
                 BitmapData sourceData = sourceBitmap.LockBits(
                     new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
                     ImageLockMode.ReadOnly,
@@ -89,6 +91,20 @@
         /// Post-processes the result bitmap
         /// </summary>
         /// <param name="resultBitmap">The bitmap to post-process</param>
-        protected virtual Bitmap PostProcess(Bitmap resultBitmap) { return resultBitmap; }
+        /// <returns>The processes bitmap</returns>
+        protected virtual Bitmap PostProcess(Bitmap resultBitmap)
+        {
+            return resultBitmap; 
+        }
+
+        /// <summary>
+        /// Pre-processes the source bitmap
+        /// </summary>
+        /// <returns>The processed bitmap</returns>
+        /// <param name="sourceBitmap">The source bitmap.</param>
+        protected virtual Bitmap PreProcess(Bitmap sourceBitmap)
+        {
+            return sourceBitmap;
+        }
     }
 }
