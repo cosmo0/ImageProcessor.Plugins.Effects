@@ -9,7 +9,7 @@
     public class ImageBlendTests : BaseTest
     {
         [Fact]
-        public void Image_is_processed()
+        public  override void Image_is_processed()
         {
             foreach (string file in this.images)
             {

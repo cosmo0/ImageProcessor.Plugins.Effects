@@ -9,32 +9,6 @@
     public class ColorBalanceTests : BaseTest
     {
         [Fact]
-        public void ColorBalance_processes_image()
-        {
-            foreach (string file in this.images)
-            {
-                // arrange
-                using (ImageFactory factory = new ImageFactory())
-                {
-                    factory.Load(file);
-
-                    ColorBalance processor = new ColorBalance();
-                    processor.DynamicParameter = new ColorBalanceParameters();
-
-                    // act
-                    Action act = () =>
-                    {
-                        Image img = processor.ProcessImage(factory);
-                        img.Save(string.Format("{0}/{1}_colorbalance.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
-                    };
-
-                    // assert
-                    act.ShouldNotThrow("because the image should have been processed without error");
-                }
-            }
-        }
-
-        [Fact]
         public void Different_values_yield_different_images()
         {
             foreach (string file in this.images)
@@ -62,6 +36,32 @@
 
                     // assert
                     result.Equals(result2).Should().BeFalse("because different parameters should yield different images");
+                }
+            }
+        }
+
+        [Fact]
+        public override void Image_is_processed()
+        {
+            foreach (string file in this.images)
+            {
+                // arrange
+                using (ImageFactory factory = new ImageFactory())
+                {
+                    factory.Load(file);
+
+                    ColorBalance processor = new ColorBalance();
+                    processor.DynamicParameter = new ColorBalanceParameters();
+
+                    // act
+                    Action act = () =>
+                    {
+                        Image img = processor.ProcessImage(factory);
+                        img.Save(string.Format("{0}/{1}_colorbalance.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                    };
+
+                    // assert
+                    act.ShouldNotThrow("because the image should have been processed without error");
                 }
             }
         }

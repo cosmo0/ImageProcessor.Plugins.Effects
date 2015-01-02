@@ -1,11 +1,12 @@
 ﻿namespace ImageProcessor.Plugins.Effects.Tests
 {
     using System.IO;
+    using Xunit;
 
     /// <summary>
     /// The base test class
     /// </summary>
-    public class BaseTest
+    public abstract class BaseTest
     {
         /// <summary>
         /// The images list
@@ -31,6 +32,9 @@
                 this.ImagePath("5.jpg")
             };
         }
+
+        [Fact]
+        public abstract void Image_is_processed();
 
         /// <summary>
         /// Builds a full path to the specified image
