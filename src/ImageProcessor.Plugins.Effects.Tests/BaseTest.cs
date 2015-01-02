@@ -6,17 +6,23 @@
     {
         protected readonly string[] images;
 
+        private readonly string path = Path.Combine(Path.GetDirectoryName(typeof(ColorBalanceTests).Assembly.Location), "img");
+
         public BaseTest()
         {
-            string path = Path.Combine(Path.GetDirectoryName(typeof(ColorBalanceTests).Assembly.Location), "img");
             this.images = new string[]
             {
-                Path.Combine(path, "1.jpg"),
-                Path.Combine(path, "2.jpg"),
-                Path.Combine(path, "3.jpg"),
-                Path.Combine(path, "4.jpg"),
-                Path.Combine(path, "5.jpg")
+                this.ImagePath("1.jpg"),
+                this.ImagePath("2.jpg"),
+                this.ImagePath("3.jpg"),
+                this.ImagePath("4.jpg"),
+                this.ImagePath("5.jpg")
             };
+        }
+
+        public string ImagePath(string fileName)
+        {
+            return Path.Combine(this.path, fileName);
         }
     }
 }

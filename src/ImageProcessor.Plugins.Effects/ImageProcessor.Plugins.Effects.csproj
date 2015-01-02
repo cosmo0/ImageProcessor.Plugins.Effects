@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsciiParameters.cs" />
@@ -43,6 +44,7 @@
     <Compile Include="ColorSubstitutionParameters.cs" />
     <Compile Include="ComicsParameters.cs" />
     <Compile Include="DrawingParameters.cs" />
+    <Compile Include="ImageBlendParameters.cs" />
     <Compile Include="Imaging\BitmapExtensions.cs" />
     <Compile Include="Imaging\Matrix.cs" />
     <Compile Include="Imaging\Pixel.cs" />
