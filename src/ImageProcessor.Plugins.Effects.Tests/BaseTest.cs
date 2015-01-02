@@ -16,7 +16,7 @@
         /// <summary>
         /// The path to the current DLL
         /// </summary>
-        private readonly string path = Path.Combine(Path.GetDirectoryName(typeof(ColorBalanceTests).Assembly.Location), "img");
+        private readonly string path = Path.Combine(Path.GetDirectoryName(typeof(BaseTest).Assembly.Location), "img");
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseTest"/> class
