@@ -11,7 +11,7 @@
     /// <summary>
     /// Provides a base processor class with common operations
     /// </summary>
-    public class ProcessorBase : IGraphicsProcessor
+    abstract public class ProcessorBase : IGraphicsProcessor
     {
         /// <summary>
         /// Gets or sets the effect parameter
@@ -76,39 +76,6 @@
         }
 
         /// <summary>
-        /// Processes the image using a pixel buffer
-        /// </summary>
-        /// <param name="pixelBuffer">The pixel buffer to use</param>
-        /// <param name="sourceWidth">The source image width</param>
-        /// <param name="sourceHeight">The source image height</param>
-        /// <param name="sourceStride">The source data stride</param>
-        /// <returns>The processed pixel buffer</returns>
-        protected virtual byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Post-processes the result bitmap
-        /// </summary>
-        /// <param name="resultBitmap">The result bitmap to post-process</param>
-        /// <returns>The processed bitmap</returns>
-        protected virtual Bitmap PostProcess(Bitmap resultBitmap)
-        {
-            return resultBitmap;
-        }
-
-        /// <summary>
-        /// Pre-processes the source bitmap
-        /// </summary>
-        /// <returns>The processed bitmap</returns>
-        /// <param name="sourceBitmap">The source bitmap to pre-process</param>
-        protected virtual Bitmap PreProcess(Bitmap sourceBitmap)
-        {
-            return sourceBitmap;
-        }
-
-        /// <summary>
         /// Guards a color minimum (0) and maximum (255) values
         /// </summary>
         /// <param name="color">The color value</param>
@@ -140,5 +107,35 @@
 
             return color;
         }
+
+        /// <summary>
+        /// Post-processes the result bitmap
+        /// </summary>
+        /// <param name="resultBitmap">The result bitmap to post-process</param>
+        /// <returns>The processed bitmap</returns>
+        protected virtual Bitmap PostProcess(Bitmap resultBitmap)
+        {
+            return resultBitmap;
+        }
+
+        /// <summary>
+        /// Pre-processes the source bitmap
+        /// </summary>
+        /// <returns>The processed bitmap</returns>
+        /// <param name="sourceBitmap">The source bitmap to pre-process</param>
+        protected virtual Bitmap PreProcess(Bitmap sourceBitmap)
+        {
+            return sourceBitmap;
+        }
+
+        /// <summary>
+        /// Processes the image using a pixel buffer
+        /// </summary>
+        /// <param name="pixelBuffer">The pixel buffer to use</param>
+        /// <param name="sourceWidth">The source image width</param>
+        /// <param name="sourceHeight">The source image height</param>
+        /// <param name="sourceStride">The source data stride</param>
+        /// <returns>The processed pixel buffer</returns>
+        protected abstract byte[] Process(byte[] pixelBuffer, int sourceWidth, int sourceHeight, int sourceStride);
     }
 }
