@@ -57,6 +57,7 @@
     <Compile Include="ComicsTests.cs" />
     <Compile Include="DrawingTests.cs" />
     <Compile Include="ImageBlendTests.cs" />
+    <Compile Include="OilPaintingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorBalanceTests.cs" />
     <Compile Include="ImageComparer.cs" />

@@ -50,6 +50,7 @@
     <Compile Include="Imaging\Pixel.cs" />
     <Compile Include="Imaging\SmoothingFilterType.cs" />
     <Compile Include="Imaging\VoronoiPoint.cs" />
+    <Compile Include="OilPaintingParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColorBalance.cs" />
     <Compile Include="ColorBalanceParameters.cs" />

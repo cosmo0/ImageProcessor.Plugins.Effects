@@ -109,6 +109,15 @@
         }
 
         /// <summary>
+        /// Guards a color minimum (0) and maximum (255) values
+        /// </summary>
+        /// <param name="color">The color value</param>
+        protected static byte Guard(double color)
+        {
+            return (byte)(color > 255 ? 255 : (color < 0 ? 0 : color));
+        }
+
+        /// <summary>
         /// Post-processes the result bitmap
         /// </summary>
         /// <param name="resultBitmap">The result bitmap to post-process</param>
