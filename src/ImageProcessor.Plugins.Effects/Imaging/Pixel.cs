@@ -6,74 +6,41 @@
     /// </summary>
     internal class Pixel
     {
-        private byte blue = 0;
-
-        private byte green = 0;
-
-        private byte red = 0;
-
-        private int xOffset = 0;
-
-        private int yOffset = 0;
-
-        public byte Blue
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Pixel"/> class
+        /// </summary>
+        public Pixel()
         {
-            get
-            {
-                return this.blue;
-            }
-            set
-            {
-                this.blue = value;
-            }
+            this.Blue = 0;
+            this.Green = 0;
+            this.Red = 0;
+            this.XOffset = 0;
+            this.YOffset = 0;
         }
 
-        public byte Green
-        {
-            get
-            {
-                return this.green;
-            }
-            set
-            {
-                this.green = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the blue value
+        /// </summary>
+        public byte Blue { get; set; }
 
-        public byte Red
-        {
-            get
-            {
-                return this.red;
-            }
-            set
-            {
-                this.red = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the green value
+        /// </summary>
+        public byte Green { get; set; }
 
-        public int XOffset
-        {
-            get
-            {
-                return this.xOffset;
-            }
-            set
-            {
-                this.xOffset = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the red value
+        /// </summary>
+        public byte Red { get; set; }
 
-        public int YOffset
-        {
-            get
-            {
-                return this.yOffset;
-            }
-            set
-            {
-                this.yOffset = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the X offset
+        /// </summary>
+        public int XOffset { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Y offset
+        /// </summary>
+        public int YOffset { get; set; }
     }
 }

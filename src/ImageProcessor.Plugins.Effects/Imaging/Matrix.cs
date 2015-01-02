@@ -5,6 +5,9 @@
     /// </summary>
     public static class Matrix
     {
+        /// <summary>
+        /// Gets a 3x3 gaussian matrix
+        /// </summary>
         public static double[,] Gaussian3x3
         {
             get
@@ -16,6 +19,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a 5x5 gaussian matrix
+        /// </summary>
         public static double[,] Gaussian5x5
         {
             get
@@ -29,6 +35,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a 7x7 gaussian matrix
+        /// </summary>
         public static double[,] Gaussian7x7
         {
             get
@@ -44,6 +53,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a 3x3 mean matrix
+        /// </summary>
         public static double[,] Mean3x3
         {
             get
@@ -55,6 +67,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a 5x5 mean matrix
+        /// </summary>
         public static double[,] Mean5x5
         {
             get
@@ -68,6 +83,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a 3x3 low pass matrix
+        /// </summary>
         public static double[,] LowPass3x3
         {
             get
@@ -79,6 +97,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a 5x5 low pass matrix
+        /// </summary>
         public static double[,] LowPass5x5
         {
             get
@@ -92,6 +113,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a 3x3 sharpen matrix
+        /// </summary>
         public static double[,] Sharpen3x3
         {
             get

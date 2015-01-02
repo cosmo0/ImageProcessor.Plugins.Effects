@@ -8,132 +8,90 @@
     /// </summary>
     internal class VoronoiPoint
     {
-        private readonly List<Pixel> pixelCollection = new List<Pixel>();
-
-        private int blueAverage = 0;
-
-        private int blueTotal = 0;
-
-        private int greenAverage = 0;
-
-        private int greenTotal = 0;
-
-        private int redAverage = 0;
-
-        private int redTotal = 0;
-
-        private int xOffset = 0;
-
-        private int yOffset = 0;
-
-        public int BlueAverage
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VoronoiPoint"/> class
+        /// </summary>
+        public VoronoiPoint()
         {
-            get
-            {
-                return this.blueAverage;
-            }
+            this.PixelCollection = new List<Pixel>();
+            this.BlueAverage = 0;
+            this.BlueTotal = 0;
+            this.GreenAverage = 0;
+            this.GreenTotal = 0;
+            this.RedAverage = 0;
+            this.RedTotal = 0;
+            this.XOffset = 0;
+            this.YOffset = 0;
         }
 
-        public int BlueTotal
-        {
-            get
-            {
-                return this.blueTotal;
-            }
-            set
-            {
-                this.blueTotal = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the blue average
+        /// </summary>
+        public int BlueAverage { get; private set; }
 
-        public int GreenAverage
-        {
-            get
-            {
-                return this.greenAverage;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the blue total
+        /// </summary>
+        public int BlueTotal { get; set; }
 
-        public int GreenTotal
-        {
-            get
-            {
-                return this.greenTotal;
-            }
-            set
-            {
-                this.greenTotal = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the green average
+        /// </summary>
+        public int GreenAverage { get; private set; }
 
-        public List<Pixel> PixelCollection
-        {
-            get
-            {
-                return this.pixelCollection;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the green total
+        /// </summary>
+        public int GreenTotal { get; set; }
 
-        public int RedAverage
-        {
-            get
-            {
-                return this.redAverage;
-            }
-        }
+        /// <summary>
+        /// Gets or sets a list of pixels to use
+        /// </summary>
+        public List<Pixel> PixelCollection { get; private set; }
 
-        public int RedTotal
-        {
-            get
-            {
-                return this.redTotal;
-            }
-            set
-            {
-                this.redTotal = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the red average
+        /// </summary>
+        public int RedAverage { get; private set; }
 
-        public int XOffset
-        {
-            get
-            {
-                return this.xOffset;
-            }
-            set
-            {
-                this.xOffset = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the red total
+        /// </summary>
+        public int RedTotal { get; set; }
 
-        public int YOffset
-        {
-            get
-            {
-                return this.yOffset;
-            }
-            set
-            {
-                this.yOffset = value;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the X offset
+        /// </summary>
+        public int XOffset { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Y offset
+        /// </summary>
+        public int YOffset { get; set; }
+
+        /// <summary>
+        /// Adds a pixel to the collection
+        /// </summary>
+        /// <param name="pixel">The pixel to add</param>
         public void AddPixel(Pixel pixel)
         {
-            this.blueTotal += pixel.Blue;
-            this.greenTotal += pixel.Green;
-            this.redTotal += pixel.Red;
+            this.BlueTotal += pixel.Blue;
+            this.GreenTotal += pixel.Green;
+            this.RedTotal += pixel.Red;
 
-            this.pixelCollection.Add(pixel);
+            this.PixelCollection.Add(pixel);
         }
 
+        /// <summary>
+        /// Calculates the average for each color
+        /// </summary>
         public void CalculateAverages()
         {
-            if (this.pixelCollection.Count > 0)
+            if (this.PixelCollection.Count > 0)
             {
-                this.blueAverage = this.blueTotal / this.pixelCollection.Count;
-                this.greenAverage = this.greenTotal / this.pixelCollection.Count;
-                this.redAverage = this.redTotal / this.pixelCollection.Count;
+                this.BlueAverage = this.BlueTotal / this.PixelCollection.Count;
+                this.GreenAverage = this.GreenTotal / this.PixelCollection.Count;
+                this.RedAverage = this.RedTotal / this.PixelCollection.Count;
             }
         }
     }
