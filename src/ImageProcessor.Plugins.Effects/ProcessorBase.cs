@@ -55,7 +55,7 @@
                     ImageLockMode.WriteOnly,
                     PixelFormat.Format32bppArgb);
                 Marshal.Copy(pixelBuffer, 0, resultData.Scan0, pixelBuffer.Length);
-                resultBitmap.UnlockBits(resultData); 
+                resultBitmap.UnlockBits(resultData);
 
                 // possible image post-process
                 resultBitmap = this.PostProcess(resultBitmap);
@@ -95,7 +95,7 @@
         /// <returns>The processed bitmap</returns>
         protected virtual Bitmap PostProcess(Bitmap resultBitmap)
         {
-            return resultBitmap; 
+            return resultBitmap;
         }
 
         /// <summary>
@@ -107,7 +107,7 @@
         {
             return sourceBitmap;
         }
-            
+
         /// <summary>
         /// Guards a color minimum (0) and maximum (255) values
         /// </summary>

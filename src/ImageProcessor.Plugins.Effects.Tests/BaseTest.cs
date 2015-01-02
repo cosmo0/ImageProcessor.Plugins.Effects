@@ -5,7 +5,7 @@
     public class BaseTest
     {
         protected readonly string[] images;
-        
+
         public BaseTest()
         {
             string path = Path.Combine(Path.GetDirectoryName(typeof(ColorBalanceTests).Assembly.Location), "img");

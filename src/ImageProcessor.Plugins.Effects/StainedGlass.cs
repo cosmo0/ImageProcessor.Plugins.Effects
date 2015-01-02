@@ -18,6 +18,23 @@
         private static readonly Dictionary<int, int> SquareRoots = new Dictionary<int, int>();
 
         /// <summary>
+        /// Post-processes the result bitmap
+        /// </summary>
+        /// <param name="resultBitmap">The result bitmap to post-process</param>
+        /// <returns>The processed bitmap</returns>
+        protected override Bitmap PostProcess(Bitmap resultBitmap)
+        {
+            StainedGlassParameters parameters = this.DynamicParameter;
+
+            if (parameters.Edges)
+            {
+                return resultBitmap.GradientBasedEdgeDetectionFilter(parameters.EdgesColor, parameters.EdgesThreshold);
+            }
+
+            return resultBitmap;
+        }
+
+        /// <summary>
         /// Processes the image using a pixel buffer
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer to use</param>
@@ -81,10 +98,10 @@
                 List<VoronoiPoint> pointSubset = new List<VoronoiPoint>();
 
                 pointSubset.AddRange(from t in randomPointList
-                    where
-                    rowOffset >= t.YOffset - (blockSize * 2) &&
-                    rowOffset <= t.YOffset + (blockSize * 2)
-                    select t);
+                                     where
+                                          rowOffset >= t.YOffset - (blockSize * 2) &&
+                                          rowOffset <= t.YOffset + (blockSize * 2)
+                                     select t);
 
                 for (int k = 0; k < pointSubset.Count; k++)
                 {
@@ -137,23 +154,6 @@
             }
 
             return resultBuffer;
-        }
-
-        /// <summary>
-        /// Post-processes the result bitmap
-        /// </summary>
-        /// <param name="resultBitmap">The result bitmap to post-process</param>
-        /// <returns>The processed bitmap</returns>
-        protected override Bitmap PostProcess(Bitmap resultBitmap)
-        {
-            StainedGlassParameters parameters = this.DynamicParameter;
-
-            if (parameters.Edges)
-            {
-                return resultBitmap.GradientBasedEdgeDetectionFilter(parameters.EdgesColor, parameters.EdgesThreshold);
-            }
-
-            return resultBitmap;
         }
 
         /// <summary>

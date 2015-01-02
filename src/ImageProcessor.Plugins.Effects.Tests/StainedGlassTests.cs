@@ -134,7 +134,7 @@
                 }
             }
         }
-        
+
         [Fact]
         public void Different_factor_values_yield_different_images()
         {

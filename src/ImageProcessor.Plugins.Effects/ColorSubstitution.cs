@@ -40,11 +40,11 @@
                     sourceRed = pixelBuffer[k + 2];
 
                     if ((sourceBlue < blueFilter + parameters.Threshold &&
-                        sourceBlue > blueFilter - parameters.Threshold) &&
+                         sourceBlue > blueFilter - parameters.Threshold) &&
                         (sourceGreen < greenFilter + parameters.Threshold &&
-                            sourceGreen > greenFilter - parameters.Threshold) &&
+                         sourceGreen > greenFilter - parameters.Threshold) &&
                         (sourceRed < redFilter + parameters.Threshold &&
-                            sourceRed > redFilter - parameters.Threshold))
+                         sourceRed > redFilter - parameters.Threshold))
                     {
                         resultBlue = blueFilter - sourceBlue + newBlueValue;
                         resultBlue = Guard(resultBlue);

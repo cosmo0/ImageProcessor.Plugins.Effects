@@ -12,6 +12,17 @@
     public class Comics : ProcessorBase
     {
         /// <summary>
+        /// Pre-processes the source bitmap
+        /// </summary>
+        /// <returns>The processed bitmap</returns>
+        /// <param name="sourceBitmap">The source bitmap.</param>
+        protected override Bitmap PreProcess(Bitmap sourceBitmap)
+        {
+            ComicsParameters parameters = this.DynamicParameter;
+            return sourceBitmap.SmoothingFilter(parameters.Smoothing);
+        }
+
+        /// <summary>
         /// Processes the image using a pixel buffer
         /// </summary>
         /// <param name="pixelBuffer">The pixel buffer to use</param>
@@ -119,17 +130,6 @@
             }
 
             return resultBuffer;
-        }
-
-        /// <summary>
-        /// Pre-processes the source bitmap
-        /// </summary>
-        /// <returns>The processed bitmap</returns>
-        /// <param name="sourceBitmap">The source bitmap.</param>
-        protected override Bitmap PreProcess(Bitmap sourceBitmap)
-        {
-            ComicsParameters parameters = this.DynamicParameter;
-            return sourceBitmap.SmoothingFilter(parameters.Smoothing);
         }
     }
 }

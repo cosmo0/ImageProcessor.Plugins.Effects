@@ -107,16 +107,19 @@
                             case DrawingParameters.EdgeFilterType.EdgeDetectMono:
                                 blue = green = red = 255;
                                 break;
+
                             case DrawingParameters.EdgeFilterType.EdgeDetectGradient:
                                 blue = blueGradient * parameters.BlueFactor;
                                 green = greenGradient * parameters.GreenFactor;
                                 red = redGradient * parameters.RedFactor;
                                 break;
+
                             case DrawingParameters.EdgeFilterType.Sharpen:
                                 blue = pixelBuffer[byteOffset] * parameters.BlueFactor;
                                 green = pixelBuffer[byteOffset + 1] * parameters.GreenFactor;
                                 red = pixelBuffer[byteOffset + 2] * parameters.RedFactor;
                                 break;
+
                             case DrawingParameters.EdgeFilterType.SharpenGradient:
                                 blue = pixelBuffer[byteOffset] + (blueGradient * parameters.BlueFactor);
                                 green = pixelBuffer[byteOffset + 1] + (greenGradient * parameters.GreenFactor);
@@ -132,7 +135,7 @@
                             blue = green = red = 0;
                         }
                         else if (parameters.FilterType == DrawingParameters.EdgeFilterType.Sharpen ||
-                            parameters.FilterType == DrawingParameters.EdgeFilterType.SharpenGradient)
+                                 parameters.FilterType == DrawingParameters.EdgeFilterType.SharpenGradient)
                         {
                             blue = pixelBuffer[byteOffset];
                             green = pixelBuffer[byteOffset + 1];

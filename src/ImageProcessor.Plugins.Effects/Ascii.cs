@@ -7,7 +7,6 @@
     using System.Runtime.InteropServices;
     using System.Text;
     using ImageProcessor.Common.Exceptions;
-    using ImageProcessor.Plugins.Effects.Imaging;
     using ImageProcessor.Plugins.Effects.Text;
     using ImageProcessor.Processors;
 
