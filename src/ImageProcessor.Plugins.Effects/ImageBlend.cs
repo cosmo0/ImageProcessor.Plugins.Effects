@@ -14,10 +14,22 @@
     /// </summary>
     public class ImageBlend : IGraphicsProcessor
     {
+        /// <summary>
+        /// Gets or sets the filter parameter
+        /// </summary>
         public dynamic DynamicParameter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the settings
+        /// </summary>
+        [Obsolete("Not used")]
         public Dictionary<string, string> Settings { get; set; }
 
+        /// <summary>
+        /// Processes the image
+        /// </summary>
+        /// <param name="factory">The factory to use</param>
+        /// <returns>The processed image</returns>
         public Image ProcessImage(ImageFactory factory)
         {
             ImageBlendParameters parameters = this.DynamicParameter;
@@ -85,6 +97,13 @@
             return sourceBitmap;
         }
 
+        /// <summary>
+        /// Calculates the color component blended value
+        /// </summary>
+        /// <param name="source">The source value</param>
+        /// <param name="overlay">The overlay value</param>
+        /// <param name="blendType">The blend type</param>
+        /// <returns>The calculated value</returns>
         private static byte CalculateColorComponentBlendValue(float source, float overlay, ImageBlendParameters.ColorComponentBlendType blendType)
         {
             float resultValue = 0;

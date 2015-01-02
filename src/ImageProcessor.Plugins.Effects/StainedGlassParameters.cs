@@ -1,7 +1,10 @@
-﻿using System.Drawing;
-
-namespace ImageProcessor.Plugins.Effects
+﻿namespace ImageProcessor.Plugins.Effects
 {
+    using System.Drawing;
+
+    /// <summary>
+    /// Represents the parameters for the stained glass effect
+    /// </summary>
     public class StainedGlassParameters
     {
         /// <summary>
