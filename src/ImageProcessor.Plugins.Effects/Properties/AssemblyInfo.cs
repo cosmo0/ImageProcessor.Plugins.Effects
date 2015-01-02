@@ -9,6 +9,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Thomas Broust, Dewald Esterhuizen")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersionAttribute("1.1.0.0")]
 [assembly: GuidAttribute("AD05B696-4B22-4D03-A45F-C1F02E60B5E3")]
