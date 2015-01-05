@@ -12,7 +12,7 @@
     /// Extension methods for bitmaps
     /// </summary>
     /// <remarks>
-    /// Copied from samples on http://softwarebydefault.com/
+    /// Copied from samples on <see href="http://softwarebydefault.com/" />
     /// </remarks>
     public static class BitmapExtensions
     {
@@ -37,30 +37,24 @@
             Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
             sourceBitmap.UnlockBits(sourceData);
 
-            double blue = 0.0;
-            double green = 0.0;
-            double red = 0.0;
-
             int filterWidth = filterMatrix.GetLength(1);
             int filterOffset = (filterWidth - 1) / 2;
-            int calcOffset = 0;
-            int byteOffset = 0;
 
             for (int offsetY = filterOffset; offsetY < sourceBitmap.Height - filterOffset; offsetY++)
             {
                 for (int offsetX = filterOffset; offsetX < sourceBitmap.Width - filterOffset; offsetX++)
                 {
-                    blue = 0;
-                    green = 0;
-                    red = 0;
+                    double blue = 0.0;
+                    double green = 0.0;
+                    double red = 0.0;
 
-                    byteOffset = offsetY * sourceData.Stride + offsetX * 4;
+                    int byteOffset = offsetY * sourceData.Stride + offsetX * 4;
 
                     for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
                     {
                         for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
                         {
-                            calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
+                            int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
                             blue += (double)(pixelBuffer[calcOffset]) * filterMatrix[filterY + filterOffset, filterX + filterOffset];
                             green += (double)(pixelBuffer[calcOffset + 1]) * filterMatrix[filterY + filterOffset, filterX + filterOffset];
                             red += (double)(pixelBuffer[calcOffset + 2]) * filterMatrix[filterY + filterOffset, filterX + filterOffset];
@@ -130,11 +124,10 @@
         /// <returns>The modified image</returns>
         public static Bitmap GradientBasedEdgeDetectionFilter(this Bitmap sourceBitmap, Color edgeColour, byte threshold = 0)
         {
-            BitmapData sourceData =
-                sourceBitmap.LockBits(new Rectangle(0, 0,
-                    sourceBitmap.Width, sourceBitmap.Height),
-                    ImageLockMode.ReadOnly,
-                    PixelFormat.Format32bppArgb);
+            BitmapData sourceData = sourceBitmap.LockBits(
+                new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppArgb);
 
             byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
             byte[] resultBuffer = new byte[sourceData.Stride * sourceData.Height];
@@ -144,32 +137,33 @@
 
             sourceBitmap.UnlockBits(sourceData);
 
-            int sourceOffset = 0, gradientValue = 0;
-            bool exceedsThreshold = false;
-
             for (int offsetY = 1; offsetY < sourceBitmap.Height - 1; offsetY++)
             {
                 for (int offsetX = 1; offsetX < sourceBitmap.Width - 1; offsetX++)
                 {
-                    sourceOffset = offsetY * sourceData.Stride + offsetX * 4;
-                    gradientValue = 0;
-                    exceedsThreshold = true;
+                    int sourceOffset = offsetY * sourceData.Stride + offsetX * 4;
+                    int gradientValue = 0;
+                    bool exceedsThreshold = true;
 
                     // Horizontal Gradient
                     CheckThreshold(
                         pixelBuffer,
                         sourceOffset - 4,
                         sourceOffset + 4,
-                        ref gradientValue, threshold, 2);
+                        ref gradientValue,
+                        threshold,
+                        2);
 
                     // Vertical Gradient
                     exceedsThreshold = CheckThreshold(
                         pixelBuffer,
                         sourceOffset - sourceData.Stride,
                         sourceOffset + sourceData.Stride,
-                        ref gradientValue, threshold, 2);
+                        ref gradientValue,
+                        threshold,
+                        2);
 
-                    if (exceedsThreshold == false)
+                    if (!exceedsThreshold)
                     {
                         gradientValue = 0;
 
@@ -178,9 +172,10 @@
                             pixelBuffer,
                             sourceOffset - 4,
                             sourceOffset + 4,
-                            ref gradientValue, threshold);
+                            ref gradientValue,
+                            threshold);
 
-                        if (exceedsThreshold == false)
+                        if (!exceedsThreshold)
                         {
                             gradientValue = 0;
 
@@ -189,9 +184,10 @@
                                 pixelBuffer,
                                 sourceOffset - sourceData.Stride,
                                 sourceOffset + sourceData.Stride,
-                                ref gradientValue, threshold);
+                                ref gradientValue,
+                                threshold);
 
-                            if (exceedsThreshold == false)
+                            if (!exceedsThreshold)
                             {
                                 gradientValue = 0;
 
@@ -200,16 +196,20 @@
                                     pixelBuffer,
                                     sourceOffset - 4 - sourceData.Stride,
                                     sourceOffset + 4 + sourceData.Stride,
-                                    ref gradientValue, threshold, 2);
+                                    ref gradientValue,
+                                    threshold,
+                                    2);
 
                                 // Diagonal Gradient : NE-SW
                                 exceedsThreshold = CheckThreshold(
                                     pixelBuffer,
                                     sourceOffset - sourceData.Stride + 4,
                                     sourceOffset - 4 + sourceData.Stride,
-                                    ref gradientValue, threshold, 2);
+                                    ref gradientValue,
+                                    threshold,
+                                    2);
 
-                                if (exceedsThreshold == false)
+                                if (!exceedsThreshold)
                                 {
                                     gradientValue = 0;
 
@@ -218,9 +218,10 @@
                                         pixelBuffer,
                                         sourceOffset - 4 - sourceData.Stride,
                                         sourceOffset + 4 + sourceData.Stride,
-                                        ref gradientValue, threshold);
+                                        ref gradientValue,
+                                        threshold);
 
-                                    if (exceedsThreshold == false)
+                                    if (!exceedsThreshold)
                                     {
                                         gradientValue = 0;
 
@@ -229,14 +230,15 @@
                                             pixelBuffer,
                                             sourceOffset - sourceData.Stride + 4,
                                             sourceOffset + sourceData.Stride - 4,
-                                            ref gradientValue, threshold);
+                                            ref gradientValue,
+                                            threshold);
                                     }
                                 }
                             }
                         }
                     }
 
-                    if (exceedsThreshold == true)
+                    if (exceedsThreshold)
                     {
                         resultBuffer[sourceOffset] = edgeColour.B;
                         resultBuffer[sourceOffset + 1] = edgeColour.G;
@@ -268,11 +270,10 @@
         /// <returns>The modified bitmap</returns>
         public static Bitmap MedianFilter(this Bitmap sourceBitmap, int matrixSize)
         {
-            BitmapData sourceData =
-                sourceBitmap.LockBits(
-                    new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
-                    ImageLockMode.ReadOnly,
-                    PixelFormat.Format32bppArgb);
+            BitmapData sourceData = sourceBitmap.LockBits(
+                new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppArgb);
 
             byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
             byte[] resultBuffer = new byte[sourceData.Stride * sourceData.Height];
@@ -315,11 +316,10 @@
 
             Bitmap resultBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height);
 
-            BitmapData resultData =
-                resultBitmap.LockBits(
-                    new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),
-                    ImageLockMode.WriteOnly,
-                    PixelFormat.Format32bppArgb);
+            BitmapData resultData = resultBitmap.LockBits(
+                new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format32bppArgb);
 
             Marshal.Copy(resultBuffer, 0, resultData.Scan0, resultBuffer.Length);
             resultBitmap.UnlockBits(resultData);

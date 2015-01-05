@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Represents a pixel in the image
-    /// http://softwarebydefault.com/2013/06/30/stained-glass-image-filter/
+    /// <see href="http://softwarebydefault.com/2013/06/30/stained-glass-image-filter/" />
     /// </summary>
     internal class Pixel
     {

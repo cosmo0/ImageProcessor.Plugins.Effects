@@ -6,6 +6,9 @@
     using System.Drawing.Imaging;
     using System.Drawing.Text;
 
+    /// <summary>
+    /// Contains extension methods on the string
+    /// </summary>
     public static class StringExtensions
     {
         /// <summary>

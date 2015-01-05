@@ -12,7 +12,7 @@
 
     /// <summary>
     /// ASCII-style filter processor
-    /// http://softwarebydefault.com/2013/07/14/image-ascii-art/
+    /// <see href="http://softwarebydefault.com/2013/07/14/image-ascii-art/" />
     /// </summary>
     public class Ascii : IGraphicsProcessor
     {

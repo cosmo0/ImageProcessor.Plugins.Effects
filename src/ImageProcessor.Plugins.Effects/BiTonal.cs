@@ -4,7 +4,7 @@
 
     /// <summary>
     /// Bi-Tonal bitmap filter
-    /// http://softwarebydefault.com/2013/04/12/bitonal-bitmaps/
+    /// <see href="http://softwarebydefault.com/2013/04/12/bitonal-bitmaps/" />
     /// </summary>
     public class BiTonal : ProcessorBase
     {

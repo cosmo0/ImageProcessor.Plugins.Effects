@@ -4,7 +4,7 @@
 
     /// <summary>
     /// Represents a Voronoi point in the image
-    /// http://softwarebydefault.com/2013/06/30/stained-glass-image-filter/
+    /// <see href="http://softwarebydefault.com/2013/06/30/stained-glass-image-filter/" />
     /// </summary>
     internal class VoronoiPoint
     {
@@ -25,7 +25,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the blue average
+        /// Gets the blue average
         /// </summary>
         public int BlueAverage { get; private set; }
 
@@ -35,7 +35,7 @@
         public int BlueTotal { get; set; }
 
         /// <summary>
-        /// Gets or sets the green average
+        /// Gets the green average
         /// </summary>
         public int GreenAverage { get; private set; }
 
@@ -45,12 +45,12 @@
         public int GreenTotal { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of pixels to use
+        /// Gets a list of pixels to use
         /// </summary>
         public List<Pixel> PixelCollection { get; private set; }
 
         /// <summary>
-        /// Gets or sets the red average
+        /// Gets the red average
         /// </summary>
         public int RedAverage { get; private set; }
 

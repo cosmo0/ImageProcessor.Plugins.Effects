@@ -25,7 +25,7 @@
         public Dictionary<string, string> Settings { get; set; }
 
         /// <summary>
-        /// Proceses the image from the factory
+        /// Processes the image from the factory
         /// </summary>
         /// <param name="factory">The factory to use</param>
         /// <returns>The processed image</returns>

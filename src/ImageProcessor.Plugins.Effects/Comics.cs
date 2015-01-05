@@ -6,8 +6,7 @@
 
     /// <summary>
     /// Provides a cartoon or comics filter
-    /// http://softwarebydefault.com/2013/06/02/cartoon-effect-image/
-    /// Gaussian 7×7, Threshold X
+    /// <see href="http://softwarebydefault.com/2013/06/02/cartoon-effect-image/" />
     /// </summary>
     public class Comics : ProcessorBase
     {

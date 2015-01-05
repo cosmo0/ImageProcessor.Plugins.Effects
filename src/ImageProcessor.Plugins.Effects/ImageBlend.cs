@@ -10,7 +10,7 @@
 
     /// <summary>
     /// Image blending filter
-    /// http://softwarebydefault.com/2013/03/10/bitmap-blending/
+    /// <see href="http://softwarebydefault.com/2013/03/10/bitmap-blending/" />
     /// </summary>
     public class ImageBlend : IGraphicsProcessor
     {

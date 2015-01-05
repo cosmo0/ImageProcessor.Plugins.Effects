@@ -4,7 +4,7 @@
 
     /// <summary>
     /// Applies a hand-drawing filter to an image
-    /// http://softwarebydefault.com/2013/06/01/gradient-based-edge-detection/
+    /// <see href="http://softwarebydefault.com/2013/06/01/gradient-based-edge-detection/" />
     /// Edge Detect Sharpen, Second Derivative, Threshold 40, Black
     /// </summary>
     public class Drawing : ProcessorBase

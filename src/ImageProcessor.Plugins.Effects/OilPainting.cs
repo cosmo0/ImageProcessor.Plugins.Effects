@@ -4,7 +4,7 @@
 
     /// <summary>
     /// Oil painting filter
-    /// http://softwarebydefault.com/2013/06/29/oil-painting-cartoon-filter/
+    /// <see href="http://softwarebydefault.com/2013/06/29/oil-painting-cartoon-filter/" />
     /// </summary>
     public class OilPainting : ProcessorBase
     {

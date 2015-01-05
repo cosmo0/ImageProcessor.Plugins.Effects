@@ -2,10 +2,8 @@
 {
     /// <summary>
     /// Provides color balance modifications
+    /// <see href="http://softwarebydefault.com/2013/04/11/bitmap-color-balance/" />
     /// </summary>
-    /// <remarks>
-    /// Shameless copypasta from http://softwarebydefault.com/2013/04/11/bitmap-color-balance/
-    /// </remarks>
     public class ColorBalance : ProcessorBase
     {
         /// <summary>

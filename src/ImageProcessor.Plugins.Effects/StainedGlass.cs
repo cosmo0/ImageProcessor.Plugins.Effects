@@ -8,7 +8,7 @@
 
     /// <summary>
     /// Stained glass-style filter processor
-    /// http://softwarebydefault.com/2013/06/30/stained-glass-image-filter/
+    /// <see href="http://softwarebydefault.com/2013/06/30/stained-glass-image-filter/" />
     /// </summary>
     public class StainedGlass : ProcessorBase
     {
