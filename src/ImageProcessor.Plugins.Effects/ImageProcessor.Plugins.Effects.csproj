@@ -46,6 +46,8 @@
     <Compile Include="Convolution.cs" />
     <Compile Include="ConvolutionParameters.cs" />
     <Compile Include="DrawingParameters.cs" />
+    <Compile Include="GradientBasedEdge.cs" />
+    <Compile Include="GradientBasedEdgeParameters.cs" />
     <Compile Include="ImageBlendParameters.cs" />
     <Compile Include="Imaging\BitmapExtensions.cs" />
     <Compile Include="Imaging\Matrix.cs">

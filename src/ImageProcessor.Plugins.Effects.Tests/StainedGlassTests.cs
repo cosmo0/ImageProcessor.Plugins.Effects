@@ -34,7 +34,7 @@
                     {
                         DistanceFormula = StainedGlassParameters.Formula.Euclidean,
                         Edges = true,
-                        EdgesColor = Color.White,
+                        EdgesColor = Color.Red,
                         EdgesThreshold = 155,
                         Factor = 4,
                         Size = 10
