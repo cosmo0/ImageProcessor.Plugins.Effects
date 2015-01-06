@@ -25,14 +25,12 @@
         public Dictionary<string, string> Settings { get; set; }
 
         /// <summary>
-        /// Processes the image from the factory
+        /// Processes a bitmap
         /// </summary>
-        /// <param name="factory">The factory to use</param>
-        /// <returns>The processed image</returns>
-        public Image ProcessImage(ImageFactory factory)
+        /// <param name="sourceBitmap">The bitmap to process</param>
+        /// <returns>The processed bitmap</returns>
+        public Bitmap ProcessBitmap(Bitmap sourceBitmap)
         {
-            Bitmap sourceBitmap = new Bitmap(factory.Image);
-
             try
             {
                 sourceBitmap = this.PreProcess(sourceBitmap);
@@ -73,6 +71,18 @@
             }
 
             return sourceBitmap;
+        }
+
+        /// <summary>
+        /// Processes the image from the factory
+        /// </summary>
+        /// <param name="factory">The factory to use</param>
+        /// <returns>The processed image</returns>
+        public Image ProcessImage(ImageFactory factory)
+        {
+            Bitmap sourceBitmap = new Bitmap(factory.Image);
+
+            return this.ProcessBitmap(sourceBitmap);
         }
 
         /// <summary>
