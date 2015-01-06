@@ -2,8 +2,9 @@
 {
     /// <summary>
     /// Provides a convolution filter
+    /// <see href="http://softwarebydefault.com/" />
     /// </summary>
-    internal class Convolution : ProcessorBase
+    public class Convolution : ProcessorBase
     {
         /// <summary>
         /// Processes the image using a pixel buffer
