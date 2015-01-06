@@ -26,67 +26,16 @@
         /// <returns>The processed bitmap</returns>
         public static Bitmap ConvolutionFilter(this Bitmap sourceBitmap, double[,] filterMatrix, double factor = 1, int bias = 0)
         {
-            BitmapData sourceData = sourceBitmap.LockBits(
-                new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
-                ImageLockMode.ReadOnly,
-                PixelFormat.Format32bppArgb);
-
-            byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
-            byte[] resultBuffer = new byte[sourceData.Stride * sourceData.Height];
-
-            Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
-            sourceBitmap.UnlockBits(sourceData);
-
-            int filterWidth = filterMatrix.GetLength(1);
-            int filterOffset = (filterWidth - 1) / 2;
-
-            for (int offsetY = filterOffset; offsetY < sourceBitmap.Height - filterOffset; offsetY++)
+            ConvolutionParameters parameters = new ConvolutionParameters
             {
-                for (int offsetX = filterOffset; offsetX < sourceBitmap.Width - filterOffset; offsetX++)
-                {
-                    double blue = 0.0;
-                    double green = 0.0;
-                    double red = 0.0;
+                Bias = bias,
+                Factor = factor,
+                Matrix = filterMatrix
+            };
 
-                    int byteOffset = (offsetY * sourceData.Stride) + (offsetX * 4);
-
-                    for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
-                    {
-                        for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
-                        {
-                            int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
-                            blue += (double)pixelBuffer[calcOffset] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            green += (double)pixelBuffer[calcOffset + 1] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            red += (double)pixelBuffer[calcOffset + 2] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
-                        }
-                    }
-
-                    blue = (factor * blue) + bias;
-                    green = (factor * green) + bias;
-                    red = (factor * red) + bias;
-
-                    blue = blue > 255 ? 255 : (blue < 0 ? 0 : blue);
-                    green = green > 255 ? 255 : (green < 0 ? 0 : green);
-                    red = red > 255 ? 255 : (red < 0 ? 0 : red);
-
-                    resultBuffer[byteOffset] = (byte)blue;
-                    resultBuffer[byteOffset + 1] = (byte)green;
-                    resultBuffer[byteOffset + 2] = (byte)red;
-                    resultBuffer[byteOffset + 3] = 255;
-                }
-            }
-
-            Bitmap resultBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height);
-
-            BitmapData resultData = resultBitmap.LockBits(
-                new Rectangle(0, 0, resultBitmap.Width, resultBitmap.Height),
-                ImageLockMode.WriteOnly,
-                PixelFormat.Format32bppArgb);
-
-            Marshal.Copy(resultBuffer, 0, resultData.Scan0, resultBuffer.Length);
-            resultBitmap.UnlockBits(resultData);
-
-            return resultBitmap;
+            Convolution filter = new Convolution();
+            filter.DynamicParameter = parameters;
+            return filter.ProcessBitmap(sourceBitmap);
         }
 
         /// <summary>
