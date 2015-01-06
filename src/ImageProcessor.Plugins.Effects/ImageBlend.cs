@@ -57,13 +57,13 @@
 
                 for (int k = 0; k < baseImageBuffer.Length && k < overlayImageBuffer.Length; k += 4)
                 {
-                    float sourceBlue = (parameters.SourceBlueEnabled ? baseImageBuffer[k] * parameters.SourceBlueLevel : 0);
-                    float sourceGreen = (parameters.SourceGreenEnabled ? baseImageBuffer[k + 1] * parameters.SourceGreenLevel : 0);
-                    float sourceRed = (parameters.SourceRedEnabled ? baseImageBuffer[k + 2] * parameters.SourceRedLevel : 0);
+                    float sourceBlue = parameters.SourceBlueEnabled ? baseImageBuffer[k] * parameters.SourceBlueLevel : 0;
+                    float sourceGreen = parameters.SourceGreenEnabled ? baseImageBuffer[k + 1] * parameters.SourceGreenLevel : 0;
+                    float sourceRed = parameters.SourceRedEnabled ? baseImageBuffer[k + 2] * parameters.SourceRedLevel : 0;
 
-                    float overlayBlue = (parameters.OverlayBlueEnabled ? overlayImageBuffer[k] * parameters.OverlayBlueLevel : 0);
-                    float overlayGreen = (parameters.OverlayGreenEnabled ? overlayImageBuffer[k + 1] * parameters.OverlayGreenLevel : 0);
-                    float overlayRed = (parameters.OverlayRedEnabled ? overlayImageBuffer[k + 2] * parameters.OverlayRedLevel : 0);
+                    float overlayBlue = parameters.OverlayBlueEnabled ? overlayImageBuffer[k] * parameters.OverlayBlueLevel : 0;
+                    float overlayGreen = parameters.OverlayGreenEnabled ? overlayImageBuffer[k + 1] * parameters.OverlayGreenLevel : 0;
+                    float overlayRed = parameters.OverlayRedEnabled ? overlayImageBuffer[k + 2] * parameters.OverlayRedLevel : 0;
 
                     baseImageBuffer[k] = CalculateColorComponentBlendValue(sourceBlue, overlayBlue, parameters.BlendTypeBlue);
                     baseImageBuffer[k + 1] = CalculateColorComponentBlendValue(sourceGreen, overlayGreen, parameters.BlendTypeGreen);
@@ -113,7 +113,7 @@
             {
                 resultValue = source + overlay;
             }
-            else if (blendType == ImageBlendParameters.ColorComponentBlendType.Substract)
+            else if (blendType == ImageBlendParameters.ColorComponentBlendType.Subtract)
             {
                 resultValue = source - overlay;
             }
@@ -123,11 +123,11 @@
             }
             else if (blendType == ImageBlendParameters.ColorComponentBlendType.AscendingOrder)
             {
-                resultValue = (source > overlay ? overlay : source);
+                resultValue = source > overlay ? overlay : source;
             }
             else if (blendType == ImageBlendParameters.ColorComponentBlendType.DescendingOrder)
             {
-                resultValue = (source < overlay ? overlay : source);
+                resultValue = source < overlay ? overlay : source;
             }
 
             if (resultValue > 255)

@@ -46,7 +46,9 @@
     <Compile Include="DrawingParameters.cs" />
     <Compile Include="ImageBlendParameters.cs" />
     <Compile Include="Imaging\BitmapExtensions.cs" />
-    <Compile Include="Imaging\Matrix.cs" />
+    <Compile Include="Imaging\Matrix.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Imaging\Pixel.cs" />
     <Compile Include="Imaging\SmoothingFilterType.cs" />
     <Compile Include="Imaging\VoronoiPoint.cs" />

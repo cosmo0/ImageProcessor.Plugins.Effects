@@ -11,7 +11,7 @@
     /// <summary>
     /// Provides a base processor class with common operations
     /// </summary>
-    abstract public class ProcessorBase : IGraphicsProcessor
+    public abstract class ProcessorBase : IGraphicsProcessor
     {
         /// <summary>
         /// Gets or sets the effect parameter
@@ -79,6 +79,7 @@
         /// Guards a color minimum (0) and maximum (255) values
         /// </summary>
         /// <param name="color">The color value</param>
+        /// <returns>The guarded color value</returns>
         protected static float Guard(float color)
         {
             if (color > 255)
@@ -93,6 +94,7 @@
         /// Guards a color minimum (0) and maximum (255) values
         /// </summary>
         /// <param name="color">The color value</param>
+        /// <returns>The guarded color value</returns>
         protected static int Guard(int color)
         {
             if (color > 255)
@@ -112,6 +114,7 @@
         /// Guards a color minimum (0) and maximum (255) values
         /// </summary>
         /// <param name="color">The color value</param>
+        /// <returns>The guarded color value</returns>
         protected static byte Guard(double color)
         {
             return (byte)(color > 255 ? 255 : (color < 0 ? 0 : color));

@@ -26,10 +26,19 @@
         /// </summary>
         public enum Formula
         {
+            /// <summary>
+            /// Euclidian distance formula
+            /// </summary>
             Euclidean,
 
+            /// <summary>
+            /// Manhattan distance formula
+            /// </summary>
             Manhattan,
 
+            /// <summary>
+            /// Chebyshev distance formula
+            /// </summary>
             Chebyshev
         }
 

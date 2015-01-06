@@ -41,15 +41,30 @@
         /// </summary>
         public enum ColorComponentBlendType
         {
+            /// <summary>
+            /// Add colors
+            /// </summary>
             Add,
 
+            /// <summary>
+            /// Color average
+            /// </summary>
             Average,
 
+            /// <summary>
+            /// Descending order
+            /// </summary>
             DescendingOrder,
 
+            /// <summary>
+            /// Ascending order
+            /// </summary>
             AscendingOrder,
 
-            Substract
+            /// <summary>
+            /// Subtract colors
+            /// </summary>
+            Subtract
         }
 
         /// <summary>

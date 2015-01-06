@@ -40,7 +40,7 @@
                     int[] greenBin = new int[levels + 1];
                     int[] redBin = new int[levels + 1];
 
-                    int byteOffset = offsetY * sourceStride + offsetX * 4;
+                    int byteOffset = (offsetY * sourceStride) + (offsetX * 4);
 
                     for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
                     {
@@ -48,7 +48,7 @@
                         {
                             int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceStride);
 
-                            int currentIntensity = (int)Math.Round(((double)(pixelBuffer[calcOffset] + pixelBuffer[calcOffset + 1] + pixelBuffer[calcOffset + 2]) / 3.0 * (levels)) / 255.0);
+                            int currentIntensity = (int)Math.Round(((double)(pixelBuffer[calcOffset] + pixelBuffer[calcOffset + 1] + pixelBuffer[calcOffset + 2]) / 3.0 * levels) / 255.0);
 
                             intensityBin[currentIntensity] += 1;
                             blueBin[currentIntensity] += pixelBuffer[calcOffset];
@@ -67,9 +67,9 @@
                     double green = greenBin[maxIndex] / maxIntensity;
                     double red = redBin[maxIndex] / maxIntensity;
 
-                    resultBuffer[byteOffset] = Guard(blue);
-                    resultBuffer[byteOffset + 1] = Guard(green);
-                    resultBuffer[byteOffset + 2] = Guard(red);
+                    resultBuffer[byteOffset] = ProcessorBase.Guard(blue);
+                    resultBuffer[byteOffset + 1] = ProcessorBase.Guard(green);
+                    resultBuffer[byteOffset + 2] = ProcessorBase.Guard(red);
                     resultBuffer[byteOffset + 3] = 255;
                 }
             }

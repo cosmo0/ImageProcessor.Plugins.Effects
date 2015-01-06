@@ -16,6 +16,9 @@
     /// </summary>
     public class Ascii : IGraphicsProcessor
     {
+        /// <summary>
+        /// Allowed characters for the colors
+        /// </summary>
         private static string colorCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         /// <summary>
@@ -41,8 +44,8 @@
 
             try
             {
-                BitmapData sourceData = sourceBitmap.LockBits(new Rectangle(0, 0,
-                    sourceBitmap.Width, sourceBitmap.Height),
+                BitmapData sourceData = sourceBitmap.LockBits(
+                    new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height),
                     ImageLockMode.ReadOnly,
                     PixelFormat.Format32bppArgb);
 
@@ -75,7 +78,7 @@
                         {
                             for (int pX = 0; pX < pixelBlockSize; pX++)
                             {
-                                offset = y * pixelBlockSize * sourceData.Stride + x * pixelBlockSize * 4;
+                                offset = (y * pixelBlockSize * sourceData.Stride) + (x * pixelBlockSize * 4);
 
                                 offset += pY * sourceData.Stride;
                                 offset += pX * 4;
@@ -124,24 +127,24 @@
 
             for (int k = 0; k < maxSize; k++)
             {
-                char charValue = (char)(Math.Floor(255 * randomChar.NextDouble() * 4));
+                char charValue = (char)Math.Floor(255 * randomChar.NextDouble() * 4);
 
                 if (stringBuilder.ToString().IndexOf(charValue) != -1)
                 {
-                    charValue = (char)(Math.Floor((byte)charValue * randomChar.NextDouble()));
+                    charValue = (char)Math.Floor((byte)charValue * randomChar.NextDouble());
                 }
 
-                if (Char.IsControl(charValue) == false &&
-                    Char.IsPunctuation(charValue) == false &&
+                if (char.IsControl(charValue) == false &&
+                    char.IsPunctuation(charValue) == false &&
                     stringBuilder.ToString().IndexOf(charValue) == -1)
                 {
                     stringBuilder.Append(charValue);
 
-                    randomChar = new Random((int)((byte)charValue * (k + 1) + DateTime.Now.Ticks));
+                    randomChar = new Random((int)(((byte)charValue * (k + 1)) + DateTime.Now.Ticks));
                 }
                 else
                 {
-                    randomChar = new Random((int)((byte)charValue * (k + 1) + DateTime.UtcNow.Ticks));
+                    randomChar = new Random((int)(((byte)charValue * (k + 1)) + DateTime.UtcNow.Ticks));
                     k -= 1;
                 }
             }

@@ -48,30 +48,30 @@
                     double green = 0.0;
                     double red = 0.0;
 
-                    int byteOffset = offsetY * sourceData.Stride + offsetX * 4;
+                    int byteOffset = (offsetY * sourceData.Stride) + (offsetX * 4);
 
                     for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
                     {
                         for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
                         {
                             int calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
-                            blue += (double)(pixelBuffer[calcOffset]) * filterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            green += (double)(pixelBuffer[calcOffset + 1]) * filterMatrix[filterY + filterOffset, filterX + filterOffset];
-                            red += (double)(pixelBuffer[calcOffset + 2]) * filterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            blue += (double)pixelBuffer[calcOffset] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            green += (double)pixelBuffer[calcOffset + 1] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
+                            red += (double)pixelBuffer[calcOffset + 2] * filterMatrix[filterY + filterOffset, filterX + filterOffset];
                         }
                     }
 
-                    blue = factor * blue + bias;
-                    green = factor * green + bias;
-                    red = factor * red + bias;
+                    blue = (factor * blue) + bias;
+                    green = (factor * green) + bias;
+                    red = (factor * red) + bias;
 
-                    blue = (blue > 255 ? 255 : (blue < 0 ? 0 : blue));
-                    green = (green > 255 ? 255 : (green < 0 ? 0 : green));
-                    red = (red > 255 ? 255 : (red < 0 ? 0 : red));
+                    blue = blue > 255 ? 255 : (blue < 0 ? 0 : blue);
+                    green = green > 255 ? 255 : (green < 0 ? 0 : green);
+                    red = red > 255 ? 255 : (red < 0 ? 0 : red);
 
-                    resultBuffer[byteOffset] = (byte)(blue);
-                    resultBuffer[byteOffset + 1] = (byte)(green);
-                    resultBuffer[byteOffset + 2] = (byte)(red);
+                    resultBuffer[byteOffset] = (byte)blue;
+                    resultBuffer[byteOffset + 1] = (byte)green;
+                    resultBuffer[byteOffset + 2] = (byte)red;
                     resultBuffer[byteOffset + 3] = 255;
                 }
             }
@@ -141,7 +141,7 @@
             {
                 for (int offsetX = 1; offsetX < sourceBitmap.Width - 1; offsetX++)
                 {
-                    int sourceOffset = offsetY * sourceData.Stride + offsetX * 4;
+                    int sourceOffset = (offsetY * sourceData.Stride) + (offsetX * 4);
                     int gradientValue = 0;
                     bool exceedsThreshold = true;
 
@@ -292,7 +292,7 @@
             {
                 for (int offsetX = filterOffset; offsetX < sourceBitmap.Width - filterOffset; offsetX++)
                 {
-                    byteOffset = offsetY * sourceData.Stride + offsetX * 4;
+                    byteOffset = (offsetY * sourceData.Stride) + (offsetX * 4);
                     neighbourPixels.Clear();
 
                     for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
@@ -440,7 +440,7 @@
             gradientValue += Math.Abs(pixelBuffer[offset1 + 1] - pixelBuffer[offset2 + 1]) / divideBy;
             gradientValue += Math.Abs(pixelBuffer[offset1 + 2] - pixelBuffer[offset2 + 2]) / divideBy;
 
-            return (gradientValue >= threshold);
+            return gradientValue >= threshold;
         }
     }
 }

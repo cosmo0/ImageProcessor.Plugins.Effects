@@ -47,13 +47,13 @@
                          sourceRed > redFilter - parameters.Threshold))
                     {
                         resultBlue = blueFilter - sourceBlue + newBlueValue;
-                        resultBlue = Guard(resultBlue);
+                        resultBlue = ProcessorBase.Guard(resultBlue);
 
                         resultGreen = greenFilter - sourceGreen + newGreenValue;
-                        resultGreen = Guard(resultGreen);
+                        resultGreen = ProcessorBase.Guard(resultGreen);
 
                         resultRed = redFilter - sourceRed + newRedValue;
-                        resultRed = Guard(resultRed);
+                        resultRed = ProcessorBase.Guard(resultRed);
 
                         pixelBuffer[k] = (byte)resultBlue;
                         pixelBuffer[k + 1] = (byte)resultGreen;
