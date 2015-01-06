@@ -2,6 +2,7 @@
 {
     using System;
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.IO;
     using FluentAssertions;
     using Xunit;
@@ -27,7 +28,7 @@
                     // act
                     Bitmap result = new Bitmap(processor.ProcessImage(factory));
                     Bitmap result2 = new Bitmap(processor2.ProcessImage(factory));
-                    result2.Save(string.Format("{0}/{1}_ascii_character_count2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                    result2.Save(string.Format("{0}/{1}_ascii_character_count2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)), ImageFormat.Jpeg);
 
                     // assert
                     result.Equals(result2).Should().BeFalse("because different parameters should yield different images");
@@ -54,7 +55,7 @@
                     // act
                     Bitmap result = new Bitmap(processor.ProcessImage(factory));
                     Bitmap result2 = new Bitmap(processor2.ProcessImage(factory));
-                    result2.Save(string.Format("{0}/{1}_ascii_fontsize2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                    result2.Save(string.Format("{0}/{1}_ascii_fontsize2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)), ImageFormat.Jpeg);
 
                     // assert
                     result.Equals(result2).Should().BeFalse("because different parameters should yield different images");
@@ -81,7 +82,7 @@
                     // act
                     Bitmap result = new Bitmap(processor.ProcessImage(factory));
                     Bitmap result2 = new Bitmap(processor2.ProcessImage(factory));
-                    result2.Save(string.Format("{0}/{1}_ascii_pixel_per_character2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                    result2.Save(string.Format("{0}/{1}_ascii_pixel_per_character2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)), ImageFormat.Jpeg);
 
                     // assert
                     result.Equals(result2).Should().BeFalse("because different parameters should yield different images");
@@ -108,7 +109,7 @@
                     // act
                     Bitmap result = new Bitmap(processor.ProcessImage(factory));
                     Bitmap result2 = new Bitmap(processor2.ProcessImage(factory));
-                    result2.Save(string.Format("{0}/{1}_ascii_zoom2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                    result2.Save(string.Format("{0}/{1}_ascii_zoom2.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)), ImageFormat.Jpeg);
 
                     // assert
                     result.Equals(result2).Should().BeFalse("because different parameters should yield different images");
@@ -133,7 +134,7 @@
                     Action act = () =>
                     {
                         Image img = processor.ProcessImage(factory);
-                        img.Save(string.Format("{0}/{1}_ascii_default.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                        img.Save(string.Format("{0}/{1}_ascii_default.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)), ImageFormat.Jpeg);
                     };
 
                     // assert

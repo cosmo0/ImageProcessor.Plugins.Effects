@@ -2,6 +2,7 @@
 {
     using System;
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.IO;
     using FluentAssertions;
     using Xunit;
@@ -25,7 +26,7 @@
                     Action act = () =>
                     {
                         Image img = processor.ProcessImage(factory);
-                        img.Save(string.Format("{0}/{1}_blend_default.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)));
+                        img.Save(string.Format("{0}/{1}_blend_default.jpg", Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)), ImageFormat.Jpeg);
                     };
 
                     // assert
