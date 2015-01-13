@@ -1,11 +1,14 @@
 Properties {
 	$LOCAL_PATH = Resolve-Path "."
 	$BUILD_PATH = Join-Path $LOCAL_PATH "build"
+
 	$TESTS_PATH = Join-Path $BUILD_PATH "tests"
 	$NUGET_OUTPUT = Join-Path $BUILD_PATH "nuget"
+
 	$TEST_RESULTS = Join-Path $LOCAL_PATH "tests"
 	$NUGET_FOLDER = Join-Path $LOCAL_PATH "src\.nuget"
 	$PACKAGES_PATH = Join-Path $LOCAL_PATH "packages"
+	$TOOLS_PATH = Join-Path $LOCAL_PATH "tools"
 
 	[xml]$PROJECTS = Get-Content (Join-Path $LOCAL_PATH "build.xml")
 	$NUGET = Join-Path $NUGET_FOLDER "nuget.exe"
@@ -17,7 +20,7 @@ $ErrorActionPreference = "Stop"
 Framework "4.0x86"
 FormatTaskName "-------- {0} --------"
 
-task default -depends Restore-Packages, Publish-Solution, Run-Tests, New-Nugets
+task default -depends Restore-Packages, Publish-Solution, Run-Tests, New-Nugets, Publish-Help
 
 # restores Nuget packages
 task Restore-Packages {
@@ -67,5 +70,12 @@ task New-Nugets -depends Publish-Solution {
 
 		# pack the nuget
 		Start-Process -FilePath $NUGET -WorkingDirectory (Join-Path $LOCAL_PATH $_) -ArgumentList "Pack -OutputDirectory $NUGET_OUTPUT" -Wait
+	}
+}
+
+# creates help files for the library
+task Publish-Help -depends Publish-Solution {
+	$PROJECTS.projects.solution.help | % {
+		& "$TOOLS_PATH\docu\docu.exe" (Join-Path $LOCAL_PATH $_.input) --output="$($_.output)"
 	}
 }

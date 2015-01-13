@@ -5,6 +5,10 @@
         <nuget>
             <folder>src\ImageProcessor.Plugins.Effects</folder>
         </nuget>
+        <help>
+            <input>build\lib\ImageProcessor.Plugins.Effects.dll</input>
+            <output>build\help\Effects</output>
+        </help>
     </solution>
 
     <!-- Test projects informations -->
