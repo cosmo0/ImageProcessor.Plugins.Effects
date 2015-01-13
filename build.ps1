@@ -5,7 +5,7 @@ Properties {
 	$TESTS_PATH = Join-Path $BUILD_PATH "tests"
 	$NUGET_OUTPUT = Join-Path $BUILD_PATH "nuget"
 
-	$TEST_RESULTS = Join-Path $LOCAL_PATH "tests"
+	$TEST_RESULTS = Join-Path $BUILD_PATH "tests_results"
 	$NUGET_FOLDER = Join-Path $LOCAL_PATH "src\.nuget"
 	$PACKAGES_PATH = Join-Path $LOCAL_PATH "packages"
 	$TOOLS_PATH = Join-Path $LOCAL_PATH "tools"
